@@ -25,7 +25,8 @@ public class ServiceCours implements IService<Cours> {
 
     @Override
     public void ajouter(Cours C) {
-        String req = "INSERT INTO cours(id,titre,tuteur,duree,date_de_lancement) VALUES(?,?,?,1,SYSDATE())";
+        String req = "INSERT INTO cours(id,titre,id_tuteur,categorie,duree,date_de_lancement)"
+                     + " VALUES(?,?,?,?,1,SYSDATE())";
         try{
             PreparedStatement st = cnx.prepareStatement(req);
             st.setString(1, C.getId());
@@ -40,12 +41,13 @@ public class ServiceCours implements IService<Cours> {
 
     @Override
     public void modifier(Cours C) {
-        String req = "UPDATE cours SET titre=?, tuteur=? WHERE id=?;";
+        String req = "UPDATE cours SET titre=?, tuteur=? , categorie=? WHERE id=?;";
         try{
             PreparedStatement st = cnx.prepareStatement(req);
             st.setString(1, C.getTitre());
             st.setString(2, C.getTuteur());
-            st.setString(3, C.getId());
+            st.setString(3, C.getCategorie());
+            st.setString(4, C.getId());
             st.executeUpdate();
             System.out.println("Cours Modifier");
         }catch(SQLException ex){
@@ -76,8 +78,8 @@ public class ServiceCours implements IService<Cours> {
             ResultSet result = st.executeQuery();
             while(result.next()) {
                 listCours.add(new Cours(result.getString("id"), result.getString("titre"),
-                                   result.getString("tuteur"),result.getInt("duree"),
-                                   result.getDate("date_de_lancement")
+                                   result.getString("tuteur"),result.getString("categorie"),
+                                   result.getInt("duree"),result.getDate("date_de_lancement")
                          ));
             }
             System.out.println("Cours récupérées !");

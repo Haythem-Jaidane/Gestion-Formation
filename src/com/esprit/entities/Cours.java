@@ -16,6 +16,7 @@ public class Cours {
     private String id;
     private String titre;
     private String tuteur;
+    private String categorie;
     private int duree;
     private Date date_lancement;
 
@@ -29,10 +30,11 @@ public class Cours {
         this.tuteur = tuteur;
     }
 
-    public Cours(String id, String titre, String tuteur, int duree, Date date_lancement) {
+    public Cours(String id, String titre, String tuteur,String categorie, int duree, Date date_lancement) {
         this.id = id;
         this.titre = titre;
         this.tuteur = tuteur;
+        this.categorie = categorie;
         this.duree = duree;
         this.date_lancement = date_lancement;
     }
@@ -57,6 +59,10 @@ public class Cours {
         return date_lancement;
     }
 
+    public String getCategorie() {
+        return categorie;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -75,6 +81,10 @@ public class Cours {
 
     public void setDate_lancement(Date date_lancement) {
         this.date_lancement = date_lancement;
+    }
+
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
     }
 
     @Override
@@ -105,6 +115,7 @@ public class Cours {
                "id = " + id + "\n"+
                "titre = " + titre +"\n"+
                "tuteur = " + tuteur +"\n"+
+               "categorie = "+ categorie +"\n"+
                "duree = " + duree +"\n"+
                "date_lancement = " + date_lancement +"\n"+ 
                "-----------------------------------------";
