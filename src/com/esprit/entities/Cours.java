@@ -1,0 +1,118 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.esprit.entities;
+
+import java.util.Date;
+import java.util.Objects;
+
+/**
+ *
+ * @author LENOVO
+ */
+public class Cours {
+    
+    private String id;
+    private String titre;
+    private String tuteur;
+    private int duree;
+    private Date date_lancement;
+
+    public Cours() {
+    }
+    
+
+    public Cours(String id, String titre, String tuteur) {
+        this.id = id;
+        this.titre = titre;
+        this.tuteur = tuteur;
+    }
+
+    public Cours(String id, String titre, String tuteur, int duree, Date date_lancement) {
+        this.id = id;
+        this.titre = titre;
+        this.tuteur = tuteur;
+        this.duree = duree;
+        this.date_lancement = date_lancement;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public String getTuteur() {
+        return tuteur;
+    }
+
+    public int getDuree() {
+        return duree;
+    }
+
+    public Date getDate_lancement() {
+        return date_lancement;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
+    public void setTuteur(String tuteur) {
+        this.tuteur = tuteur;
+    }
+
+    public void setDuree(int duree) {
+        this.duree = duree;
+    }
+
+    public void setDate_lancement(Date date_lancement) {
+        this.date_lancement = date_lancement;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cours other = (Cours) obj;
+        return Objects.equals(this.id, other.id);
+    }
+
+    @Override
+    public String toString() {
+        return " --------------- Cours ------------------\n" +
+               "id = " + id + "\n"+
+               "titre = " + titre +"\n"+
+               "tuteur = " + tuteur +"\n"+
+               "duree = " + duree +"\n"+
+               "date_lancement = " + date_lancement +"\n"+ 
+               "-----------------------------------------";
+    }
+    
+    
+    
+    
+    
+    
+}
