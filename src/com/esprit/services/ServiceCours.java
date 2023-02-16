@@ -32,6 +32,7 @@ public class ServiceCours implements IService<Cours> {
             st.setString(1, C.getId());
             st.setString(2, C.getTitre());
             st.setString(3, C.getTuteur());
+            st.setString(4, C.getCategorie());
             st.executeUpdate();
             System.out.println("Cours Ajouter");
         }catch(SQLException ex){

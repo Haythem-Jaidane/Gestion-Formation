@@ -4,7 +4,7 @@
  */
 package com.esprit.tests;
 
-import com.esprit.entities.Cours;
+import com.esprit.entities.*;
 import com.esprit.services.*;
 
 /**
@@ -20,6 +20,18 @@ public class MainProg {
         //sp1.supprimer(new Personne(1));
         //System.out.println(sp1.afficher());
         ServiceCours sp2 = new ServiceCours();
-        sp2.ajouter(new Cours("55dd9", "jad alik","Haythem"));
+        ServiceChapitre sp1 = new ServiceChapitre();
+        ServiceContenu sp3 = new ServiceContenu();
+        //sp2.ajouter(new Cours("55dd9", "jad alik","Haythem","web"));
+        //sp1.ajouter(new Chapitre("655dd","html","55dd9"));
+        
+        // ------------------------ CONTENU --------------------
+        
+        //sp3.ajouter(new Contenu("888","video",5,"www","655dd"));
+        //sp3.modifier(new Contenu("888","video",5,"www","655dd"));
+        sp3.supprimer(new Contenu("888"));
+        //System.out.println(sp3.afficher());
+        
+        
     }
 }

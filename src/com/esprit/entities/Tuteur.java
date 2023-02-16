@@ -8,10 +8,6 @@ package com.esprit.entities;
  *
  * @author LENOVO
  */
-public class Progres {
-    private String idCours;
-    private String idUtlisateur;
-    private int progres;
-    private int note_examen;
-    private boolean isComplete;
+public class Tuteur {
+    
 }

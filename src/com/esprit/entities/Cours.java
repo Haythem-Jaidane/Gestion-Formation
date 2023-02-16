@@ -20,14 +20,15 @@ public class Cours {
     private int duree;
     private Date date_lancement;
 
-    public Cours() {
+    public Cours(String id) {
+        this.id = id;
     }
-    
 
-    public Cours(String id, String titre, String tuteur) {
+    public Cours(String id, String titre, String tuteur,String categorie) {
         this.id = id;
         this.titre = titre;
         this.tuteur = tuteur;
+        this.categorie = categorie;
     }
 
     public Cours(String id, String titre, String tuteur,String categorie, int duree, Date date_lancement) {
