@@ -14,23 +14,39 @@ import com.esprit.services.*;
 public class MainProg {
     
     public static void main(String[] args) {
-
-        //sp1.ajouter(new Personne("Fedi", "Ahmed"));
-        //sp1.modifier(new Personne(1, "Zaher", "Hamdi"));
-        //sp1.supprimer(new Personne(1));
-        //System.out.println(sp1.afficher());
-        ServiceCours sp2 = new ServiceCours();
-        ServiceChapitre sp1 = new ServiceChapitre();
+        
+        ServiceCours sp1 = new ServiceCours();
+        ServiceChapitre sp2 = new ServiceChapitre();
         ServiceContenu sp3 = new ServiceContenu();
-        //sp2.ajouter(new Cours("55dd9", "jad alik","Haythem","web"));
-        //sp1.ajouter(new Chapitre("655dd","html","55dd9"));
+        
+        // ---------------------- COURS ------------------------
+        
+        //sp1.ajouter(new Cours("55dd9", "jad alik","gtt","web"));
+        //sp1.modifier(new Cours("55dd9", "jad alik","gtt","web"));
+        //sp1.supprimer(new Cours("55dd9"));
+        //System.out.println(sp1.afficher());
+        
+        // --------------------- Chapitre ----------------------
+        
+        
+        //sp2.ajouter(new Chapitre("655dd","html","55dd9"));
+        //sp2.modifier(new Chapitre("655dd","css","55dd9"));
+        //sp2.supprimer(new Chapitre("655dd","html","55dd9"));
+        //sp2.afficher(new Chapitre("655dd","html","55dd9"));
         
         // ------------------------ CONTENU --------------------
         
         //sp3.ajouter(new Contenu("888","video",5,"www","655dd"));
         //sp3.modifier(new Contenu("888","video",5,"www","655dd"));
-        sp3.supprimer(new Contenu("888"));
+        //sp3.supprimer(new Contenu("888"));
         //System.out.println(sp3.afficher());
+        
+        // ------------------------ Tuteur ---------------------
+        
+        
+        // ------------------------ Progres --------------------
+        
+        
         
         
     }

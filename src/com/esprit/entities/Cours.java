@@ -15,7 +15,7 @@ public class Cours {
     
     private String id;
     private String titre;
-    private String tuteur;
+    private String id_tuteur;
     private String categorie;
     private int duree;
     private Date date_lancement;
@@ -27,14 +27,14 @@ public class Cours {
     public Cours(String id, String titre, String tuteur,String categorie) {
         this.id = id;
         this.titre = titre;
-        this.tuteur = tuteur;
+        this.id_tuteur = tuteur;
         this.categorie = categorie;
     }
 
     public Cours(String id, String titre, String tuteur,String categorie, int duree, Date date_lancement) {
         this.id = id;
         this.titre = titre;
-        this.tuteur = tuteur;
+        this.id_tuteur = tuteur;
         this.categorie = categorie;
         this.duree = duree;
         this.date_lancement = date_lancement;
@@ -49,7 +49,7 @@ public class Cours {
     }
 
     public String getTuteur() {
-        return tuteur;
+        return id_tuteur;
     }
 
     public int getDuree() {
@@ -73,7 +73,7 @@ public class Cours {
     }
 
     public void setTuteur(String tuteur) {
-        this.tuteur = tuteur;
+        this.id_tuteur = tuteur;
     }
 
     public void setDuree(int duree) {
@@ -115,7 +115,7 @@ public class Cours {
         return " --------------- Cours ------------------\n" +
                "id = " + id + "\n"+
                "titre = " + titre +"\n"+
-               "tuteur = " + tuteur +"\n"+
+               "tuteur = " + id_tuteur +"\n"+
                "categorie = "+ categorie +"\n"+
                "duree = " + duree +"\n"+
                "date_lancement = " + date_lancement +"\n"+ 

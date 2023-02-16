@@ -42,7 +42,7 @@ public class ServiceCours implements IService<Cours> {
 
     @Override
     public void modifier(Cours C) {
-        String req = "UPDATE cours SET titre=?, tuteur=? , categorie=? WHERE id=?;";
+        String req = "UPDATE cours SET titre=?, id_tuteur=? , categorie=? WHERE id=?;";
         try{
             PreparedStatement st = cnx.prepareStatement(req);
             st.setString(1, C.getTitre());
@@ -79,7 +79,7 @@ public class ServiceCours implements IService<Cours> {
             ResultSet result = st.executeQuery();
             while(result.next()) {
                 listCours.add(new Cours(result.getString("id"), result.getString("titre"),
-                                   result.getString("tuteur"),result.getString("categorie"),
+                                   result.getString("id_tuteur"),result.getString("categorie"),
                                    result.getInt("duree"),result.getDate("date_de_lancement")
                          ));
             }
