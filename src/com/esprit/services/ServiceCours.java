@@ -83,7 +83,7 @@ public class ServiceCours implements IService<Cours> {
                                    result.getInt("duree"),result.getDate("date_de_lancement")
                          ));
             }
-            System.out.println("Cours récupérées !");
+            System.out.println("Cours recuperees !");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }

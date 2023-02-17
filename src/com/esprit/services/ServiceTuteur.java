@@ -4,11 +4,14 @@
  */
 package com.esprit.services;
 
+import com.esprit.entities.Progres;
 import com.esprit.entities.Tuteur;
 import com.esprit.utils.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +24,7 @@ public class ServiceTuteur implements IService<Tuteur> {
 
     @Override
     public void ajouter(Tuteur T) {
-        String req = "INSERT INTO progres(id_tuteur,id_user,nom,CIN,Description)"
+        String req = "INSERT INTO tuteur(id_tuteur,id_user,nom,CIN,describtion)"
                      + " VALUES(?,?,?,?,?)";
         try{
             PreparedStatement st = cnx.prepareStatement(req);
@@ -39,7 +42,7 @@ public class ServiceTuteur implements IService<Tuteur> {
 
     @Override
     public void modifier(Tuteur T) {
-        String req = "UPDATE cours SET nom=?, CIN=? , Description=? WHERE id_tuteur=?;";
+        String req = "UPDATE tuteur SET nom=?, CIN=? , describtion=? WHERE id_tuteur=?;";
         try{
             PreparedStatement st = cnx.prepareStatement(req);
             st.setString(1, T.getNom());
@@ -54,13 +57,38 @@ public class ServiceTuteur implements IService<Tuteur> {
     }
 
     @Override
-    public void supprimer(Tuteur p) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void supprimer(Tuteur T) {
+        String req = "DELETE FROM tuteur WHERE id_tuteur=?;";
+        try{
+            PreparedStatement st = cnx.prepareStatement(req);
+            st.setString(1, T.getIdtuteur());
+            st.executeUpdate();
+            System.out.println("Tuteur Supprimer");
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
     }
 
     @Override
     public List<Tuteur> afficher() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<Tuteur> listTuteur = new ArrayList<>();
+        
+        String req = "SELECT * FROM tuteur";
+        try {
+            PreparedStatement st = cnx.prepareStatement(req);
+            ResultSet result = st.executeQuery();
+            while(result.next()) {
+                listTuteur.add(new Tuteur(result.getString("id_tuteur"),result.getString("id_user"),
+                                   result.getString("nom"),result.getInt("CIN"),
+                                   result.getString("describtion")
+                         ));
+            }
+            System.out.println("Tuteur recuperees !");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return listTuteur;
     }
     
 }

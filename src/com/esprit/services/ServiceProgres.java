@@ -4,11 +4,14 @@
  */
 package com.esprit.services;
 
+import com.esprit.entities.Cours;
 import com.esprit.entities.Progres;
 import com.esprit.utils.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -56,13 +59,39 @@ public class ServiceProgres implements IService<Progres> {
     }
 
     @Override
-    public void supprimer(Progres p) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void supprimer(Progres P) {
+        String req = "DELETE FROM cours WHERE id_cour=? and id_utilisateur=?;";
+        try{
+            PreparedStatement st = cnx.prepareStatement(req);
+            st.setString(1,P.getIdCours());
+            st.setString(2,P.getIdUtlisateur());
+            st.executeUpdate();
+            System.out.println("Progres Supprimer");
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
     }
 
     @Override
     public List<Progres> afficher() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<Progres> listProgres = new ArrayList<>();
+        
+        String req = "SELECT * FROM progres";
+        try {
+            PreparedStatement st = cnx.prepareStatement(req);
+            ResultSet result = st.executeQuery();
+            while(result.next()) {
+                listProgres.add(new Progres(result.getString("id_cours"),result.getString("id_utilisateur"),
+                                   result.getInt("progres_utilisateur"),result.getInt("note_examen"),
+                                   result.getBoolean("isComplete")
+                         ));
+            }
+            System.out.println("progres recuperees !");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return listProgres;
     }
     
 }
