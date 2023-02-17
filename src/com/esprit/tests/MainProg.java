@@ -23,7 +23,7 @@ public class MainProg {
         
         // ---------------------- COURS ------------------------
         
-        //sp1.ajouter(new Cours("55dd9", "Introduction au web","gtt","web"));
+        sp1.ajouter(new Cours("55dd9", "Introduction au web","gtt","web"));
         //sp1.modifier(new Cours("55dd9", "jad alik","gtt","web"));
         //sp1.supprimer(new Cours("55dd9"));
         //System.out.println(sp1.afficher());
@@ -52,8 +52,8 @@ public class MainProg {
         
         // ------------------------ Progres --------------------
         
-        //sp4.ajouter(new Progres("55dd9", "ff", 50, 0, 0));
-        //sp4.modifier(new Progres("55dd9", "ff", 100, 15, 1)));
+        //sp4.ajouter(new Progres("55dd9", "ff", 50, 0, false));
+        //sp4.modifier(new Progres("55dd9", "ff", 100, 15, true));
         //sp4.supprimer(new Progres("55dd9", "ff"));
         //System.out.println(sp4.afficher());
         

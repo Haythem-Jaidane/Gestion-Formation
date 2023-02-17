@@ -42,8 +42,8 @@ public class ServiceProgres implements IService<Progres> {
 
     @Override
     public void modifier(Progres P) {
-        String req = "UPDATE cours SET progres_utilisateur=?, note_examen=? , isComplete=? "
-                     + "WHERE id_cour=? and id_utilisateur=? ;";
+        String req = "UPDATE progres SET progres_utilisateur=?, note_examen=? , isComplete=? "
+                     + "WHERE id_cours=? and id_utilisateur=? ;";
         try{
             PreparedStatement st = cnx.prepareStatement(req);
             st.setInt(1,P.getProgres());
@@ -60,7 +60,7 @@ public class ServiceProgres implements IService<Progres> {
 
     @Override
     public void supprimer(Progres P) {
-        String req = "DELETE FROM cours WHERE id_cour=? and id_utilisateur=?;";
+        String req = "DELETE FROM progres WHERE id_cours=? and id_utilisateur=?;";
         try{
             PreparedStatement st = cnx.prepareStatement(req);
             st.setString(1,P.getIdCours());
