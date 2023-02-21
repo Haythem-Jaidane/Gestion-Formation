@@ -17,6 +17,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -41,9 +43,14 @@ public class InterfaceCoursController implements Initializable {
     @FXML
     private TableColumn<AfficahageMainInterface, Integer> progre;
     
+    @FXML
+    private TableColumn<AfficahageMainInterface, Integer> startid;
+    
     
     
     ServiceCours spCours = new ServiceCours(); 
+    ServiceProgres spProgres = new ServiceProgres();
+ 
 
     
     /**
@@ -52,6 +59,8 @@ public class InterfaceCoursController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        Utilisateur Login = new Utilisateur("gtt");
+        
         List<Cours> lCour = spCours.afficher();
         
         List<AfficahageMainInterface> u = new ArrayList<>();
@@ -59,7 +68,9 @@ public class InterfaceCoursController implements Initializable {
         for(Cours C:lCour){
             //tab_cour.getItems().add(C);
             Utilisateur Utli = spCours.getNomTuteurAvecId(C);
-            u.add(new AfficahageMainInterface(C.getTitre(),Utli.getNom(),C.getCategorie(),C.getDuree()));
+            Progres Prog = spProgres.getProgresUtlisateurParCours(C,Login);
+            ProgressBar progBar = new ProgressBar(Prog.getProgres());
+            u.add(new AfficahageMainInterface(C.getTitre(),Utli.getNom(),C.getCategorie(),C.getDuree(),progBar,new Button("commancer")));
         }
         
         System.out.println(u);
@@ -70,8 +81,9 @@ public class InterfaceCoursController implements Initializable {
         id_tuteur.setCellValueFactory(new PropertyValueFactory<>("Tuteur_nom"));
         id_categorie.setCellValueFactory(new PropertyValueFactory<>("Categorie"));
         id_duree.setCellValueFactory(new PropertyValueFactory<>("duree"));
+        progre.setCellValueFactory(new PropertyValueFactory<>("progress"));
+        startid.setCellValueFactory(new PropertyValueFactory<>("B"));
         
-        ObservableList<AfficahageMainInterface> data = FXCollections.observableArrayList(u);
         tab_cour.getItems().addAll(u);
     }    
     

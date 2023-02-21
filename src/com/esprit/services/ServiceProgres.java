@@ -6,6 +6,7 @@ package com.esprit.services;
 
 import com.esprit.entities.Cours;
 import com.esprit.entities.Progres;
+import com.esprit.entities.Utilisateur;
 import com.esprit.utils.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -92,6 +93,26 @@ public class ServiceProgres implements IService<Progres> {
         }
         
         return listProgres;
+    }
+    
+    public Progres getProgresUtlisateurParCours(Cours C,Utilisateur U){
+        String req = "SELECT * FROM progres where id_utilisateur=? and id_cours=?";
+        try {
+            PreparedStatement st = cnx.prepareStatement(req);
+            st.setString(1, U.getId_utilisateur());
+            st.setString(2, C.getId());
+            ResultSet result = st.executeQuery();
+            while(result.next()) {
+                System.out.println("progres avec ID recuperees !");
+                return new Progres(result.getString("id_Cours"), result.getString("id_utilisateur"),
+                                   result.getInt("progres_utilisateur"), result.getInt("note_examen"),
+                                   result.getBoolean("isComplete"));
+            }
+            return new Progres();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return new Progres();
+        }
     }
     
 }

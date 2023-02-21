@@ -58,7 +58,7 @@
                         <TableColumn fx:id="id_categorie" prefWidth="91.0" text="Catégorie" />
                         <TableColumn fx:id="id_duree" text="Durée" />
                         <TableColumn fx:id="progre" prefWidth="96.0" text="Ton Progrés" />
-                        <TableColumn prefWidth="82.0" />
+                        <TableColumn fx:id="startid" prefWidth="82.0" />
                     </columns>
                   </TableView>
                </children>

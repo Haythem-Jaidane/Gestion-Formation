@@ -27,6 +27,12 @@ public class Utilisateur {
         this.id_utilisateur = id_utilisateur;
         this.nom = nom;
     }
+
+    public Utilisateur(String id_utilisateur) {
+        this.id_utilisateur = id_utilisateur;
+    }
+
+    
     
     
 

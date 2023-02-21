@@ -19,12 +19,18 @@ public class AfficahageMainInterface {
     private ProgressBar progress;
     private Button B;
 
-    public AfficahageMainInterface(String Titre, String Tuteur_nom, String Categorie, int duree) {
+    public AfficahageMainInterface(String Titre, String Tuteur_nom, String Categorie, int duree, ProgressBar progress, Button B) {
         this.Titre = Titre;
         this.Tuteur_nom = Tuteur_nom;
         this.Categorie = Categorie;
         this.duree = duree;
+        this.progress = progress;
+        this.B = B;
     }
+
+    
+
+    
 
     public String getTitre() {
         return Titre;

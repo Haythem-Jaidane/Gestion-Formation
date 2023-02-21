@@ -30,6 +30,10 @@ public class Progres {
         this.isComplete = isComplete;
     }
 
+    public Progres() {
+        
+    }
+
     public String getIdCours() {
         return idCours;
     }
