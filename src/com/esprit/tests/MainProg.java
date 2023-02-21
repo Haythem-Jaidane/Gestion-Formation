@@ -19,11 +19,10 @@ public class MainProg {
         ServiceChapitre sp2 = new ServiceChapitre();
         ServiceContenu sp3 = new ServiceContenu();
         ServiceProgres sp4 = new ServiceProgres();
-        ServiceTuteur sp5 = new ServiceTuteur();
         
         // ---------------------- COURS ------------------------
         
-        sp1.ajouter(new Cours("55dd9", "Introduction au web","gtt","web"));
+        sp1.ajouter(new Cours("55dd", "Introduction au web","55","web"));
         //sp1.modifier(new Cours("55dd9", "jad alik","gtt","web"));
         //sp1.supprimer(new Cours("55dd9"));
         //System.out.println(sp1.afficher());

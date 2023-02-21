@@ -8,7 +8,10 @@ import com.esprit.entities.*;
 import com.esprit.services.*;
         
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,21 +29,22 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class InterfaceCoursController implements Initializable {
 
     @FXML
-    private TableView<Cours> tab_cour;
+    private TableView<AfficahageMainInterface> tab_cour;
     @FXML
-    private TableColumn<Cours, String> id_titre;
+    private TableColumn<AfficahageMainInterface, String> id_titre;
     @FXML
-    private TableColumn<Tuteur, String> id_tuteur;
+    private TableColumn<AfficahageMainInterface, String> id_tuteur;
     @FXML
-    private TableColumn<Cours, String> id_categorie;
+    private TableColumn<AfficahageMainInterface, String> id_categorie;
     @FXML
-    private TableColumn<Cours, Integer> id_duree;
+    private TableColumn<AfficahageMainInterface, Integer> id_duree;
     @FXML
-    private TableColumn<Progres, Integer> progre;
+    private TableColumn<AfficahageMainInterface, Integer> progre;
+    
+    
     
     ServiceCours spCours = new ServiceCours(); 
 
-    List lCour = spCours.afficher();
     
     /**
      * Initializes the controller class.
@@ -48,10 +52,27 @@ public class InterfaceCoursController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        id_titre.setCellValueFactory(new PropertyValueFactory<Cours,String>("titre"));
-        id_categorie.setCellValueFactory(new PropertyValueFactory<Cours,String>("categorie"));
-        id_duree.setCellValueFactory(new PropertyValueFactory<Cours,Integer>("duree"));
-        tab_cour.setItems(FXCollections.observableList(lCour));
+        List<Cours> lCour = spCours.afficher();
+        
+        List<AfficahageMainInterface> u = new ArrayList<>();
+        
+        for(Cours C:lCour){
+            //tab_cour.getItems().add(C);
+            Utilisateur Utli = spCours.getNomTuteurAvecId(C);
+            u.add(new AfficahageMainInterface(C.getTitre(),Utli.getNom(),C.getCategorie(),C.getDuree()));
+        }
+        
+        System.out.println(u);
+
+        
+        
+        id_titre.setCellValueFactory(new PropertyValueFactory<>("Titre"));
+        id_tuteur.setCellValueFactory(new PropertyValueFactory<>("Tuteur_nom"));
+        id_categorie.setCellValueFactory(new PropertyValueFactory<>("Categorie"));
+        id_duree.setCellValueFactory(new PropertyValueFactory<>("duree"));
+        
+        ObservableList<AfficahageMainInterface> data = FXCollections.observableArrayList(u);
+        tab_cour.getItems().addAll(u);
     }    
     
 }

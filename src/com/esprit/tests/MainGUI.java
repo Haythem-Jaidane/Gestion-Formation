@@ -21,6 +21,7 @@ import javafx.stage.Stage;
  */
 public class MainGUI extends Application {
     
+    
     @Override
     public void start(Stage primaryStage) throws IOException {
         
@@ -29,8 +30,10 @@ public class MainGUI extends Application {
         Scene scene = new Scene(root);
         
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Workshop PIDEV");
+        primaryStage.setTitle("Gestion Formation");
         primaryStage.show();
+        
+
     }
 
     /**

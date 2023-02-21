@@ -5,6 +5,7 @@
 package com.esprit.services;
 
 import com.esprit.entities.Cours;
+import com.esprit.entities.Utilisateur;
 import com.esprit.utils.DataSource;
 
 import java.sql.Connection;
@@ -89,6 +90,25 @@ public class ServiceCours implements IService<Cours> {
         }
         
         return listCours;
+    }
+    
+    public Utilisateur getNomTuteurAvecId(Cours C){
+        
+        String req = "SELECT * FROM Utilisateur where id_utilisateur=?";
+        try {
+            PreparedStatement st = cnx.prepareStatement(req);
+            st.setString(1, C.getTuteur());
+            ResultSet result = st.executeQuery();
+            while(result.next()) {
+                System.out.println("utilsateur avec ID recuperees !");
+                return new Utilisateur(result.getString("id_utilisateur"), result.getString("nom"));
+            }
+            return new Utilisateur();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return new Utilisateur();
+        }
+        
     }
     
 }
