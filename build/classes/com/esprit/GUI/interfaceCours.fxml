@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -9,8 +8,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.shape.Circle?>
 
 <AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="673.0" style="-fx-background-color: #0C2C40;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.GUI.InterfaceCoursController">
    <children>
@@ -19,13 +16,7 @@
             <Image url="@assets/Logo.png" />
          </image>
       </ImageView>
-      <HBox alignment="CENTER" layoutX="473.0" layoutY="5.0" prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <Label text="Label" textFill="WHITE" />
-            <Circle fill="DODGERBLUE" radius="34.0" stroke="BLACK" strokeType="INSIDE" />
-         </children>
-      </HBox>
-      <TextField layoutX="177.0" layoutY="118.0" prefHeight="31.0" prefWidth="302.0" style="-fx-background-radius: 50px;" />
+      <TextField fx:id="recharcheText" layoutX="177.0" layoutY="118.0" onKeyTyped="#Recherche" prefHeight="31.0" prefWidth="302.0" style="-fx-background-radius: 50px;" />
       <ScrollPane layoutX="20.0" layoutY="197.0" prefHeight="200.0" prefWidth="636.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="469.0" prefWidth="549.0">
@@ -44,7 +35,7 @@
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Button fx:id="ajouter" layoutX="177.0" layoutY="40.0" mnemonicParsing="false" onMouseClicked="#ajouterCoursT" text="Ajouter un cours" />
-      <Button fx:id="consulter" layoutX="328.0" layoutY="39.0" mnemonicParsing="false" text="Consulter mes cours" />
+      <Button fx:id="ajouter" layoutX="166.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#ajouterCoursT" text="Ajouter un cours" />
+      <Button fx:id="consulter" layoutX="362.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#consulterMesCours" text="Consulter mes cours" />
    </children>
 </AnchorPane>

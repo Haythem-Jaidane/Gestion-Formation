@@ -24,7 +24,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -55,11 +58,14 @@ public class InterfaceCoursController implements Initializable {
     @FXML
     private Button consulter;
     
+    @FXML
+    private TextField recharcheText;
     
     
     ServiceCours spCours = new ServiceCours(); 
     ServiceProgres spProgres = new ServiceProgres();
     private Utilisateur Login;    
+    
 
     
     /**
@@ -72,6 +78,23 @@ public class InterfaceCoursController implements Initializable {
         
         List<Cours> lCour = spCours.afficher();
         
+        List<AfficahageMainInterface> u = affichageDeCoursDUneList(lCour);
+        
+        System.out.println(u);
+
+        
+        
+        id_titre.setCellValueFactory(new PropertyValueFactory<>("Titre"));
+        id_tuteur.setCellValueFactory(new PropertyValueFactory<>("Tuteur_nom"));
+        id_categorie.setCellValueFactory(new PropertyValueFactory<>("Categorie"));
+        id_duree.setCellValueFactory(new PropertyValueFactory<>("duree"));
+        progre.setCellValueFactory(new PropertyValueFactory<>("progress"));
+        startid.setCellValueFactory(new PropertyValueFactory<>("B"));
+        
+        tab_cour.getItems().addAll(u);
+    }
+    
+    private List<AfficahageMainInterface> affichageDeCoursDUneList(List<Cours> lCour){
         List<AfficahageMainInterface> u = new ArrayList<>();
         
         for(Cours C:lCour){
@@ -92,18 +115,7 @@ public class InterfaceCoursController implements Initializable {
             u.add(new AfficahageMainInterface(C.getTitre(),Utli.getNom(),C.getCategorie(),C.getDuree(),progBar,But));
         }
         
-        System.out.println(u);
-
-        
-        
-        id_titre.setCellValueFactory(new PropertyValueFactory<>("Titre"));
-        id_tuteur.setCellValueFactory(new PropertyValueFactory<>("Tuteur_nom"));
-        id_categorie.setCellValueFactory(new PropertyValueFactory<>("Categorie"));
-        id_duree.setCellValueFactory(new PropertyValueFactory<>("duree"));
-        progre.setCellValueFactory(new PropertyValueFactory<>("progress"));
-        startid.setCellValueFactory(new PropertyValueFactory<>("B"));
-        
-        tab_cour.getItems().addAll(u);
+        return u;
     }
     
     
@@ -139,6 +151,25 @@ public class InterfaceCoursController implements Initializable {
         Parent root = loader.load();
         tab_cour.getScene().setRoot(root);  
         InterfaceAjouterCoursController ajouter = loader.getController();
- }
+    }
+
+
+    @FXML
+    private void consulterMesCours(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceConsulterCour.fxml"));
+        Parent root = loader.load();
+        tab_cour.getScene().setRoot(root);  
+        InterfaceConsulterCourController ajouter = loader.getController();
+    }
+
+    @FXML
+    private void Recherche(KeyEvent event) {
+        List<Cours> T=spCours.Rechercher(new Cours("5",recharcheText.getText()));
+        
+        List<AfficahageMainInterface> u = affichageDeCoursDUneList(T);
+        
+        tab_cour.getItems().clear();
+        tab_cour.getItems().addAll(u);
+    }
     
 }

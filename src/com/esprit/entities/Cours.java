@@ -24,6 +24,13 @@ public class Cours {
         this.id = id;
     }
 
+    public Cours(String id, String titre) {
+        this.id = id;
+        this.titre = titre;
+    }
+    
+    
+
     public Cours(String id, String titre, String tuteur,String categorie) {
         this.id = id;
         this.titre = titre;

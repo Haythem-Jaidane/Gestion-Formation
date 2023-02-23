@@ -46,7 +46,7 @@ public class InterfaceAjouterContenuController implements Initializable {
         fileChooser.setTitle("Open File");
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
-            System.out.println(File);
+            System.out.println(selectedFile);
         }
     }
 

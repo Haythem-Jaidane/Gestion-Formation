@@ -111,4 +111,25 @@ public class ServiceCours implements IService<Cours> {
         
     }
     
+    public List<Cours> Rechercher(Cours C){
+        List<Cours> listCours = new ArrayList<>();
+        
+        String req = "SELECT * FROM cours where (lower(titre) LIKE ?);";
+        try {
+            PreparedStatement st = cnx.prepareStatement(req);
+            st.setString(1, "%"+C.getTitre()+"%");
+            ResultSet result = st.executeQuery();
+            while(result.next()) {
+                listCours.add(new Cours(result.getString("id"), result.getString("titre"),
+                                   result.getString("id_tuteur"),result.getString("categorie"),
+                                   result.getInt("duree"),result.getDate("date_de_lancement")
+                         ));
+            }
+            System.out.println("Cours rechercher !");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return listCours;
+    }
 }
