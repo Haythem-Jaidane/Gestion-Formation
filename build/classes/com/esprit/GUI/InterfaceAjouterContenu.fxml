@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1">
-    
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0C2C40;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="com.esprit.GUI.InterfaceAjouterContenuController">
+   <children>
+      <ImageView fitHeight="69.0" fitWidth="55.0" layoutX="28.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <image>
+            <Image url="@assets/Logo.png" />
+         </image>
+      </ImageView>
+      <TextField layoutX="207.0" layoutY="135.0" />
+      <ComboBox layoutX="204.0" layoutY="71.0" prefHeight="31.0" prefWidth="194.0" />
+      <Button fx:id="filechose" layoutX="202.0" layoutY="195.0" mnemonicParsing="false" onMouseClicked="#fileChoseClick" prefHeight="31.0" prefWidth="194.0" text="enter le contenu" />
+      <Button fx:id="contnu" layoutX="103.0" layoutY="284.0" mnemonicParsing="false" onMouseClicked="#autreContenu" text="ajouter un autre contenu" />
+      <Button fx:id="chapitre" layoutX="320.0" layoutY="284.0" mnemonicParsing="false" onMouseClicked="#NouveauCapitre" text="ajouter un autre chapitre" />
+      <Button fx:id="terminer" layoutX="201.0" layoutY="331.0" mnemonicParsing="false" onMouseClicked="#terminerAjout" text="Terminer l'ajout du cours" />
+   </children>
 </AnchorPane>
