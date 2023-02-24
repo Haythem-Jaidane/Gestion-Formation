@@ -5,6 +5,7 @@
 package com.esprit.services;
 
 import com.esprit.entities.Cours;
+import com.esprit.entities.Contenu;
 import com.esprit.entities.Utilisateur;
 import com.esprit.utils.DataSource;
 
@@ -27,13 +28,14 @@ public class ServiceCours implements IService<Cours> {
     @Override
     public void ajouter(Cours C) {
         String req = "INSERT INTO cours(id,titre,id_tuteur,categorie,duree,date_de_lancement)"
-                     + " VALUES(?,?,?,?,1,SYSDATE())";
+                     + " VALUES(?,?,?,?,?,SYSDATE())";
         try{
             PreparedStatement st = cnx.prepareStatement(req);
             st.setString(1, C.getId());
             st.setString(2, C.getTitre());
             st.setString(3, C.getTuteur());
             st.setString(4, C.getCategorie());
+            st.setInt(5, C.getDuree());
             st.executeUpdate();
             System.out.println("Cours Ajouter");
         }catch(SQLException ex){
@@ -132,4 +134,34 @@ public class ServiceCours implements IService<Cours> {
         
         return listCours;
     }
+    
+    public void incrementer(Cours C,Contenu con){
+        
+        Cours Cou = new Cours();
+        String req = "SELECT * FROM cours Where id=?";
+        String req1 = "UPDATE cours SET duree=? WHERE id=?;";
+        try {
+            PreparedStatement st = cnx.prepareStatement(req);
+            st.setString(1, C.getId());
+            ResultSet result = st.executeQuery();
+            while(result.next()) {
+                Cou = new Cours(result.getString("id"), result.getString("titre"),
+                                   result.getString("id_tuteur"),result.getString("categorie"),
+                                   result.getInt("duree"),result.getDate("date_de_lancement"));
+            }
+            System.out.println(Cou);
+            System.out.println("Duree Incremente !");
+            PreparedStatement st1 = cnx.prepareStatement(req1);
+            st1.setInt(1, Cou.getDuree()+con.getDuree());
+            System.out.println(Cou.getDuree()+con.getDuree());
+            st1.setString(2, C.getId());
+            st1.executeUpdate();
+            System.out.println("Duree Incremente !");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+    }
 }
+
+

@@ -4,9 +4,23 @@
  */
 package com.esprit.GUI;
 
+import com.esprit.entities.Progres;
+import com.esprit.services.ServiceProgres;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.Label;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -15,12 +29,85 @@ import javafx.fxml.Initializable;
  */
 public class InterfaceWelcomeCoursController implements Initializable {
 
+    @FXML
+    private Circle Cyc;
+    @FXML
+    private Rectangle sqr;
+    @FXML
+    private Label coursName;
+    
+    private String cour_id;
+    private String cour_name;
+    private String id_utlisateur;
+    
+    ServiceProgres spProgres = new ServiceProgres();
+
+    public void setCour_id(String cour_id) {
+        this.cour_id = cour_id;
+    }
+
+    public void setCour_name(String cour_name) {
+        this.coursName.setText(cour_name);
+    }
+
+    public void setId_utlisateur(String id_utlisateur) {
+        this.id_utlisateur = id_utlisateur;
+    }
+    
+    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
+        
+        
+        new java.util.Timer().schedule( 
+        new java.util.TimerTask() {
+            @Override
+            public void run() {
+                
+                try {
+                    spProgres.ajouter(new Progres(cour_id,id_utlisateur,0,0,false));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceLireCours.fxml"));
+                    Parent root = loader.load();
+                    coursName.getScene().setRoot(root);
+                    InterfaceLireCoursController Lire = loader.getController();
+                } catch (IOException ex) {
+                    Logger.getLogger(InterfaceWelcomeCoursController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }, 
+        5000 
+        );
+
+        
+        RotateTransition rotateTransition = new RotateTransition();
+        ScaleTransition scaleTransition = new ScaleTransition(); 
+        
+        scaleTransition.setDuration(Duration.millis(1000));
+        rotateTransition.setDuration(Duration.millis(1000)); 
+        
+        rotateTransition.setNode(sqr);
+        scaleTransition.setNode(Cyc);
+        
+        rotateTransition.setByAngle(360);   
+        scaleTransition.setByY(0.5); 
+        scaleTransition.setByX(0.5); 
+        
+        rotateTransition.setCycleCount(50); 
+        scaleTransition.setCycleCount(50);
+       
+        rotateTransition.setAutoReverse(false); 
+        scaleTransition.setAutoReverse(false); 
+       
+        rotateTransition.play();
+        scaleTransition.play();
+        
+        
+       
     }    
     
 }

@@ -115,4 +115,22 @@ public class ServiceProgres implements IService<Progres> {
         }
     }
     
+    public boolean checkProgresUtlisateurParCours(Cours C,Utilisateur U){
+        String req = "SELECT * FROM progres where id_utilisateur=? and id_cours=?";
+        try {
+            PreparedStatement st = cnx.prepareStatement(req);
+            st.setString(1, U.getId_utilisateur());
+            st.setString(2, C.getId());
+            ResultSet result = st.executeQuery();
+            while(result.next()) {
+                System.out.println("progres avec ID recuperees !");
+                return true;
+            }
+            return false;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+    
 }

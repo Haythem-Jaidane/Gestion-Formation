@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,11 +16,14 @@
             <Image url="@assets/Logo.png" />
          </image>
       </ImageView>
-      <TextField layoutX="240.0" layoutY="136.0" />
-      <ComboBox layoutX="237.0" layoutY="72.0" prefHeight="31.0" prefWidth="194.0" />
-      <Button fx:id="filechose" layoutX="235.0" layoutY="196.0" mnemonicParsing="false" onMouseClicked="#fileChoseClick" prefHeight="31.0" prefWidth="194.0" text="enter le contenu" />
+      <TextField fx:id="duree" layoutX="285.0" layoutY="146.0" />
+      <ComboBox fx:id="type" layoutX="282.0" layoutY="82.0" prefHeight="31.0" prefWidth="194.0" />
+      <Button fx:id="filechose" layoutX="280.0" layoutY="206.0" mnemonicParsing="false" onMouseClicked="#fileChoseClick" prefHeight="31.0" prefWidth="194.0" text="enter le contenu" />
       <Button fx:id="contnu" layoutX="136.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#autreContenu" text="ajouter un autre contenu" />
       <Button fx:id="chapitre" layoutX="353.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#NouveauCapitre" text="ajouter un autre chapitre" />
       <Button fx:id="terminer" layoutX="234.0" layoutY="332.0" mnemonicParsing="false" onMouseClicked="#terminerAjout" text="Terminer l'ajout du cours" />
+      <Label layoutX="140.0" layoutY="87.0" text="type de contenu" textFill="WHITE" />
+      <Label layoutX="151.0" layoutY="151.0" text="durée estimé" textFill="WHITE" />
+      <Label layoutX="166.0" layoutY="211.0" text="Contenu" textFill="WHITE" />
    </children>
 </AnchorPane>

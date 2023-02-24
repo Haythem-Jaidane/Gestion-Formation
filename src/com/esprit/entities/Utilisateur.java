@@ -4,6 +4,8 @@
  */
 package com.esprit.entities;
 
+import java.util.Objects;
+
 /**
  *
  * @author LENOVO
@@ -59,6 +61,30 @@ public class Utilisateur {
     public void setIsTuto(boolean isTuto) {
         this.isTuto = isTuto;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.id_utilisateur);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Utilisateur other = (Utilisateur) obj;
+        return Objects.equals(this.id_utilisateur, other.id_utilisateur);
+    }
+    
+    
 
     @Override
     public String toString() {

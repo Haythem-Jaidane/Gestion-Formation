@@ -10,6 +10,7 @@ import com.esprit.services.ServiceCours;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.UUID;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,7 +40,15 @@ public class InterfaceAjouterCoursController implements Initializable {
     private ComboBox<String> categorie;
 
     ServiceCours spCours = new ServiceCours(); 
-    Utilisateur Login = new Utilisateur("gtt");
+    private String id_Login ;
+
+    public void setId_Login(String id_Login) {
+        System.out.println(id_Login);
+        this.id_Login = id_Login;
+    }
+    
+    
+    
     
     /**
      * Initializes the controller class.
@@ -53,12 +62,16 @@ public class InterfaceAjouterCoursController implements Initializable {
     @FXML
     private void ajouterNouveauChapitre(MouseEvent event) throws IOException {
         
-        spCours.ajouter(new Cours("t", nom.getText(),Login.getId_utilisateur(),categorie.getValue()));
+        Cours C = new Cours(nom.getText(),id_Login,categorie.getValue(),0);
+        C.setId(UUID.randomUUID().toString());
+        
+        spCours.ajouter(C);
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("interfaceAjouterChapitre.fxml"));
         Parent root = loader.load();
         retour.getScene().setRoot(root);  
         InterfaceAjouterChapitreController Chapitre = loader.getController();
+        Chapitre.setId_Cours(C.getId());
     }
 
     @FXML

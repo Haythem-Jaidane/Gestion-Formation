@@ -20,6 +20,11 @@ public class Cours {
     private int duree;
     private Date date_lancement;
 
+    public Cours() {
+    }
+    
+    
+
     public Cours(String id) {
         this.id = id;
     }
@@ -28,6 +33,15 @@ public class Cours {
         this.id = id;
         this.titre = titre;
     }
+
+    public Cours(String titre, String id_tuteur, String categorie, int duree) {
+        this.titre = titre;
+        this.id_tuteur = id_tuteur;
+        this.categorie = categorie;
+        this.duree = duree;
+    }
+
+    
     
     
 

@@ -15,8 +15,8 @@
             <Image url="@assets/Logo.png" />
          </image>
       </ImageView>
-      <TextField layoutX="243.0" layoutY="189.0" prefHeight="31.0" prefWidth="235.0" />
-      <Label layoutX="141.0" layoutY="194.0" text="Nom Chpitre" textFill="WHITE" />
+      <TextField fx:id="CapitreText" layoutX="243.0" layoutY="189.0" prefHeight="31.0" prefWidth="235.0" />
+      <Label layoutX="118.0" layoutY="194.0" text="Nom Chapitre" textFill="WHITE" />
       <Button fx:id="ajouterConutenu" layoutX="283.0" layoutY="282.0" mnemonicParsing="false" onMouseClicked="#ajouterNouveauContenu" prefHeight="31.0" prefWidth="111.0" text="Ajouter" />
    </children>
 </AnchorPane>

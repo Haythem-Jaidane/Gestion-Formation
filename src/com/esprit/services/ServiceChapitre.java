@@ -83,4 +83,23 @@ public class ServiceChapitre implements IService<Chapitre> {
         return listChapitre;
     }
     
+    public List<Chapitre> getChapterByCours(String id_cours) {
+        List<Chapitre> listChapitre = new ArrayList<>();
+        
+        String req = "SELECT * FROM chapitre where id_chapitre=?";
+        try {
+            PreparedStatement st = cnx.prepareStatement(req);
+            st.setString(1, id_cours);
+            ResultSet result = st.executeQuery();
+            while(result.next()) {
+                listChapitre.add(new Chapitre(result.getString("id_chapitre"), result.getString("titre"),result.getString("id_cours")));
+            }
+            System.out.println("Cours recuperees !");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return listChapitre;
+    }
+    
 }

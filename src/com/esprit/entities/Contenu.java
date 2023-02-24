@@ -21,6 +21,15 @@ public class Contenu {
         this.id = id;
     }
 
+    public Contenu(String type, int duree, String lien_contenu, String id_chapitre) {
+        this.type = type;
+        this.duree = duree;
+        this.lien_contenu = lien_contenu;
+        this.id_chapitre = id_chapitre;
+    }
+    
+    
+
     public Contenu(String id, String type, int duree, String lien_contenu, String id_chapitre) {
         this.id = id;
         this.type = type;

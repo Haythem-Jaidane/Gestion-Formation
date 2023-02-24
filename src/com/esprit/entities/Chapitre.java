@@ -19,6 +19,13 @@ public class Chapitre {
         this.id = id;
     }
 
+    public Chapitre(String titre, String id_cours) {
+        this.titre = titre;
+        this.id_cours = id_cours;
+    }
+    
+    
+
     public Chapitre(String id, String titre, String id_cours) {
         this.id = id;
         this.titre = titre;

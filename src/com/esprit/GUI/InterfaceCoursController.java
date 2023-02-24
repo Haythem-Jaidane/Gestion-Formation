@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -65,8 +66,14 @@ public class InterfaceCoursController implements Initializable {
     ServiceCours spCours = new ServiceCours(); 
     ServiceProgres spProgres = new ServiceProgres();
     private Utilisateur Login;    
-    
 
+    public TextField getRecharcheText() {
+        return recharcheText;
+    }
+
+    
+    
+    
     
     /**
      * Initializes the controller class.
@@ -104,9 +111,14 @@ public class InterfaceCoursController implements Initializable {
             ProgressBar progBar = new ProgressBar();
             progBar.setProgress(Prog.getProgres()/100.0f);
             Button But;
-            if(Prog.getProgres()==0){
+            if(!spProgres.checkProgresUtlisateurParCours(C,Login)){
                 But = new Button("Commancer");
-                But.setOnAction(this::welcomeCours);
+                welcomeCours w = new welcomeCours();
+                w.setId_utilisateur(Login.getId_utilisateur());
+                w.setC(C);
+                w.setCn(this);
+                But.setOnAction(w);
+                
             }
             else{
                 But = new Button("Poursuivre");
@@ -118,19 +130,7 @@ public class InterfaceCoursController implements Initializable {
         return u;
     }
     
-    
-    private void welcomeCours(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceWelcomeCours.fxml"));
-            Parent root = loader.load();
-            tab_cour.getScene().setRoot(root);
-            
-            InterfaceWelcomeCoursController Welcome = loader.getController();
-        } catch (IOException ex) {
-            Logger.getLogger(InterfaceCoursController.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
-    }
     
     private void continueCours(ActionEvent event) {
         try {
@@ -150,7 +150,9 @@ public class InterfaceCoursController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceAjouterCours.fxml"));
         Parent root = loader.load();
         tab_cour.getScene().setRoot(root);  
+        //InterfaceAjouterCoursController ajouter = new InterfaceAjouterCoursController(Login.getId_utilisateur()) ;
         InterfaceAjouterCoursController ajouter = loader.getController();
+        ajouter.setId_Login(Login.getId_utilisateur());
     }
 
 
@@ -173,3 +175,4 @@ public class InterfaceCoursController implements Initializable {
     }
     
 }
+
