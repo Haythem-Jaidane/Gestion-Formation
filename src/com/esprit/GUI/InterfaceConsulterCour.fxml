@@ -14,14 +14,13 @@
             <Image url="@assets/Logo.png" />
          </image>
       </ImageView>
-      <TableView layoutX="20.0" layoutY="160.0" prefHeight="200.0" prefWidth="628.0">
+      <TableView fx:id="tab_cours" layoutX="20.0" layoutY="160.0" prefHeight="200.0" prefWidth="628.0">
         <columns>
-          <TableColumn prefWidth="124.0" text="titre" />
-          <TableColumn prefWidth="104.0" text="Categorie" />
-            <TableColumn prefWidth="100.0" />
+          <TableColumn fx:id="Titre" prefWidth="124.0" text="titre" />
+          <TableColumn fx:id="Categorie" prefWidth="104.0" text="Categorie" />
+            <TableColumn fx:id="supp" prefWidth="100.0" />
         </columns>
       </TableView>
-      <Button fx:id="retourButton" layoutX="225.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#RetournerP" text="retour" />
-      <Button layoutX="379.0" layoutY="39.0" mnemonicParsing="false" text="Button" />
+      <Button fx:id="retourButton" layoutX="272.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#RetournerP" prefHeight="31.0" prefWidth="124.0" text="retour" />
    </children>
 </AnchorPane>

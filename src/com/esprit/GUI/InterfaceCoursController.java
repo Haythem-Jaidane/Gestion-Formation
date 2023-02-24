@@ -152,6 +152,8 @@ public class InterfaceCoursController implements Initializable {
         Parent root = loader.load();
         tab_cour.getScene().setRoot(root);  
         InterfaceConsulterCourController ajouter = loader.getController();
+        ajouter.setId_tuto(Login.getId_utilisateur());
+        ajouter.setTableView();
     }
 
     @FXML

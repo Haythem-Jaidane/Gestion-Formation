@@ -154,4 +154,15 @@ public class ServiceProgres implements IService<Progres> {
         }
     }
     
+    public void supprimerParCours(Progres P) {
+        String req = "DELETE FROM progres WHERE id_cours=?;";
+        try{
+            PreparedStatement st = cnx.prepareStatement(req);
+            st.setString(1,P.getIdCours());
+            st.executeUpdate();
+            System.out.println("Progres Supprimer");
+        }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
 }

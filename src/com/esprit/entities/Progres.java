@@ -17,6 +17,11 @@ public class Progres {
     private int note_examen;
     private boolean isComplete;
 
+    public Progres(String idCours) {
+        this.idCours = idCours;
+    }
+    
+
     public Progres(String idCours, String idUtlisateur) {
         this.idCours = idCours;
         this.idUtlisateur = idUtlisateur;

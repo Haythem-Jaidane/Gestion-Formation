@@ -94,7 +94,7 @@ public class ServiceChapitre implements IService<Chapitre> {
             while(result.next()) {
                 listChapitre.add(new Chapitre(result.getString("id_chapitre"), result.getString("titre"),result.getString("id_cours")));
             }
-            System.out.println("Cours recuperees !");
+            System.out.println("chapitre recuperees par cours!");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
