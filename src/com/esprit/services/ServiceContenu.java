@@ -92,4 +92,26 @@ public class ServiceContenu implements IService<Contenu> {
         return listContenu;
     }
     
+    
+    public List<Contenu> getContenuByChapitre(String Chapitre_id) {
+        List<Contenu> listContenu = new ArrayList<>();
+        
+        String req = "SELECT * FROM contenu where id_chapitre=?";
+        try {
+            PreparedStatement st = cnx.prepareStatement(req);
+            st.setString(1, Chapitre_id);
+            ResultSet result = st.executeQuery();
+            while(result.next()) {
+                listContenu.add(new Contenu(result.getString("id_contenu"), result.getString("type"),
+                                   result.getInt("duree"),result.getString("lien_contenu"),
+                                   result.getString("id_chapitre")
+                         ));
+            }
+            System.out.println("Contenu recuperees !");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return listContenu;
+    }
 }

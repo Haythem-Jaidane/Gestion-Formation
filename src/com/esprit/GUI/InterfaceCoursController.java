@@ -122,28 +122,18 @@ public class InterfaceCoursController implements Initializable {
             }
             else{
                 But = new Button("Poursuivre");
-                But.setOnAction(this::continueCours);
+                ContinuCours conti = new ContinuCours();
+                conti.setId_utilisateur(Login.getId_utilisateur());
+                conti.setC(C);
+                conti.setCn(this);
+                But.setOnAction(conti);
             }
             u.add(new AfficahageMainInterface(C.getTitre(),Utli.getNom(),C.getCategorie(),C.getDuree(),progBar,But));
         }
         
         return u;
     }
-    
-
-    
-    private void continueCours(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceLireCours.fxml"));
-            Parent root = loader.load();
-            tab_cour.getScene().setRoot(root);
-            
-            InterfaceLireCoursController Lire = loader.getController();
-        } catch (IOException ex) {
-            Logger.getLogger(InterfaceCoursController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
+   
 
     @FXML
     private void ajouterCoursT(MouseEvent event) throws IOException{ 

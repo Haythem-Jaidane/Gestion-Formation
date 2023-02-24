@@ -8,20 +8,19 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="637.0" style="-fx-background-color: #0C2C40;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="com.esprit.GUI.InterfaceWelcomeCoursController">
+<AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="673.0" style="-fx-background-color: #0C2C40;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.GUI.InterfaceWelcomeCoursController">
    <children>
       <ImageView fitHeight="69.0" fitWidth="55.0" layoutX="57.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
          <image>
             <Image url="@assets/Logo.png" />
          </image>
       </ImageView>
-      <Label layoutX="125.0" layoutY="133.0" text="Bienvennu au Cour" textFill="WHITE">
+      <Label layoutX="160.0" layoutY="133.0" text="Bienvennu au Cour" textFill="WHITE">
          <font>
             <Font name="Britannic Bold" size="50.0" />
          </font>
       </Label>
-      <Label fx:id="coursName" layoutX="120.0" layoutY="223.0" text="Label" textFill="#fcfcfc">
+      <Label fx:id="coursName" layoutX="303.0" layoutY="223.0" text="Label" textAlignment="CENTER" textFill="#fcfcfc">
          <font>
             <Font name="Britannic Bold" size="35.0" />
          </font>

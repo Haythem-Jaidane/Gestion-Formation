@@ -5,13 +5,29 @@
 package com.esprit.GUI;
 
 import com.esprit.entities.Chapitre;
+import com.esprit.entities.Contenu;
+import com.esprit.entities.Cours;
+import com.esprit.entities.Progres;
 import com.esprit.services.ServiceChapitre;
+import com.esprit.services.ServiceContenu;
+import com.esprit.services.ServiceCours;
+import com.esprit.services.ServiceProgres;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 /**
@@ -23,30 +39,108 @@ public class InterfaceLireCoursController implements Initializable {
 
     @FXML
     private VBox chapter_continer;
-    private String id_cours;
+    @FXML
+    private Button Retour;
+    @FXML
+    private Label Title;
     
+    @FXML
+    private AnchorPane course_contenu;
+    
+    ServiceCours spCours = new ServiceCours();
     ServiceChapitre spChapitre = new ServiceChapitre();
+    ServiceContenu spContenu = new ServiceContenu();
+    ServiceProgres spProgress = new ServiceProgres();
+    
+    private String id_cours;
+    private String title_cours;
+    private String id_utilisateur;
+
+    public void setIdutilisateur(String id_utilisateur) {
+        this.id_utilisateur = id_utilisateur;
+    }
+    
+    
+    
+
+    public void setTitle_cours(String title_cours) {
+        this.title_cours = title_cours;
+    }
+    
 
     public void setId_cours(String id_cours) {
         this.id_cours = id_cours;
     }
     
-    
-
+    public void MettreLeCours(){
+        Title.setText(title_cours);
+        List<Chapitre> L = spChapitre.getChapterByCours(id_cours);
+        
+        for(Chapitre C:L){
+            TitledPane T = new TitledPane();
+            T.setText(C.getTitre());
+            
+            List<Contenu> Con=spContenu.getContenuByChapitre(C.getId());
+            
+            int i=1;
+            for(Contenu O:Con){
+                Hyperlink H = new Hyperlink("Lesson "+i);
+                T.setContent(H);
+                H.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
+                        Label l = new Label("Lesson "+i);
+                        Button But = new Button("lesson terminer");
+                        course_contenu.getChildren().add(l);
+                        course_contenu.getChildren().add(But);
+                        But.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent e) {
+                                Progres P = spProgress.getProgresUtlisateurParCours(id_cours,id_utilisateur);
+                                Cours C = spCours.getCoursById(id_cours);
+                                //System.out.println(C);
+                                int a = (int)(P.getProgres()+((float)O.getDuree()/(float)C.getDuree())*100);
+                                P.setProgres(a);
+                                System.out.println(a);
+                                System.out.println(P.getProgres()+(int)(((float)O.getDuree()/(float)C.getDuree())*100));
+                                
+                                if(P.getProgres()==100){
+                                    P.setIsComplete(true);
+                                }
+                                spProgress.modifier(P);
+                                System.out.println(P.getProgres());
+                                But.setOpacity(0);
+                            }
+                         });
+                    }
+                });
+                
+                
+                
+            }
+            
+            chapter_continer.getChildren().add(T);
+        }
+        
+        TitledPane T = new TitledPane();
+        T.setText("Passer L'examan");
+        chapter_continer.getChildren().add(T);
+    }
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        List<Chapitre> L = spChapitre.getChapterByCours(id_cours);
-        for(Chapitre C:L){
-            TitledPane T = new TitledPane();
-            T.setText(C.getTitre());
             
-            chapter_continer.getChildren().add(T);
-        }
         
     }    
+
+    @FXML
+    private void retouner(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("interfaceCours.fxml"));
+        Parent root = loader.load();
+        Retour.getScene().setRoot(root);  
+        InterfaceCoursController retour = loader.getController();
+    }
     
 }

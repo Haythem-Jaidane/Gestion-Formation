@@ -75,6 +75,9 @@ public class InterfaceWelcomeCoursController implements Initializable {
                     Parent root = loader.load();
                     coursName.getScene().setRoot(root);
                     InterfaceLireCoursController Lire = loader.getController();
+                    Lire.setId_cours(cour_id);
+                    Lire.setTitle_cours(cour_name);
+                    Lire.MettreLeCours();
                 } catch (IOException ex) {
                     Logger.getLogger(InterfaceWelcomeCoursController.class.getName()).log(Level.SEVERE, null, ex);
                 }

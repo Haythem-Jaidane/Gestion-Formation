@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="673.0" style="-fx-background-color: #0C2C40;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="com.esprit.GUI.InterfaceLireCoursController">
+<AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="673.0" style="-fx-background-color: #0C2C40;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.GUI.InterfaceLireCoursController">
    <children>
       <ImageView fitHeight="69.0" fitWidth="55.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
          <image>
@@ -21,7 +23,7 @@
                <children>
                   <SplitPane dividerPositions="0.6698113207547169" layoutX="-1.0" layoutY="-2.0" prefHeight="475.0" prefWidth="638.0">
                     <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                      <AnchorPane fx:id="course_contenu" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
                               <VBox fx:id="chapter_continer" layoutY="1.0" prefHeight="437.0" prefWidth="208.0" />
@@ -33,5 +35,11 @@
             </AnchorPane>
         </content>
       </ScrollPane>
+      <Button fx:id="Retour" layoutX="557.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#retouner" text="Retour" />
+      <Label fx:id="Title" layoutX="309.0" layoutY="37.0" text="Label" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -86,7 +86,7 @@ public class ServiceChapitre implements IService<Chapitre> {
     public List<Chapitre> getChapterByCours(String id_cours) {
         List<Chapitre> listChapitre = new ArrayList<>();
         
-        String req = "SELECT * FROM chapitre where id_chapitre=?";
+        String req = "SELECT * FROM chapitre where id_cours=?";
         try {
             PreparedStatement st = cnx.prepareStatement(req);
             st.setString(1, id_cours);

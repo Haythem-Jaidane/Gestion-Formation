@@ -16,6 +16,7 @@ import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.TitledPane;
 
 /**
  *
@@ -160,8 +161,31 @@ public class ServiceCours implements IService<Cours> {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        
     }
+        
+        public Cours getCoursById(String id_cours){
+            
+            Cours C = new Cours();
+            String req = "SELECT * FROM cours where id=?;";
+            try {
+                PreparedStatement st = cnx.prepareStatement(req);
+                st.setString(1, id_cours);
+                ResultSet result = st.executeQuery();
+                while(result.next()) {
+                    C = new Cours(result.getString("id"), result.getString("titre"),
+                                   result.getString("id_tuteur"),result.getString("categorie"),
+                                   result.getInt("duree"),result.getDate("date_de_lancement"));
+                }
+                //System.out.println(C);
+                return C;
+            }
+             catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return new Cours();
+                    }
+        }
+        
+        
 }
 
 
