@@ -12,6 +12,7 @@ import java.util.Objects;
  */
 public class Contenu {
     private String id;
+    private String Titre;
     private String type;
     private int duree;
     private String lien_contenu;
@@ -21,22 +22,33 @@ public class Contenu {
         this.id = id;
     }
 
-    public Contenu(String type, int duree, String lien_contenu, String id_chapitre) {
+    public Contenu(String Titre, String type, int duree, String lien_contenu, String id_chapitre) {
+        this.Titre = Titre;
         this.type = type;
         this.duree = duree;
         this.lien_contenu = lien_contenu;
         this.id_chapitre = id_chapitre;
     }
-    
-    
 
-    public Contenu(String id, String type, int duree, String lien_contenu, String id_chapitre) {
+    public Contenu(String id, String Titre, String type, int duree, String lien_contenu, String id_chapitre) {
         this.id = id;
+        this.Titre = Titre;
         this.type = type;
         this.duree = duree;
         this.lien_contenu = lien_contenu;
         this.id_chapitre = id_chapitre;
     }
+
+    public String getTitre() {
+        return Titre;
+    }
+
+    public void setTitre(String Titre) {
+        this.Titre = Titre;
+    }
+
+
+    
 
     public String getId() {
         return id;

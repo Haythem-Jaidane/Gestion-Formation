@@ -15,13 +15,20 @@ public class AffichageConsulter {
     private String Titre;
     private String Categorie;
     private Button Supprimer;
+    private Button voir_chapitre;
+    private String id_cours;
 
-    public AffichageConsulter(String Titre, String Categorie, Button Supprimer) {
+    public AffichageConsulter(String Titre, String Categorie, Button Supprimer, Button voir_chapitre, String id_cours) {
         this.Titre = Titre;
         this.Categorie = Categorie;
         this.Supprimer = Supprimer;
+        this.voir_chapitre = voir_chapitre;
+        this.id_cours = id_cours;
     }
 
+    
+
+    
     public String getTitre() {
         return Titre;
     }
@@ -45,6 +52,25 @@ public class AffichageConsulter {
     public void setSupprimer(Button Supprimer) {
         this.Supprimer = Supprimer;
     }
+
+    public Button getVoir_chapitre() {
+        return voir_chapitre;
+    }
+
+    public void setVoir_chapitre(Button voir_chapitre) {
+        this.voir_chapitre = voir_chapitre;
+    }
+    
+    
+
+    public String getId_cours() {
+        return id_cours;
+    }
+
+    public void setId_cours(String id_cours) {
+        this.id_cours = id_cours;
+    }
+
     
     
     

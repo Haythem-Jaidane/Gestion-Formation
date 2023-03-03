@@ -16,8 +16,11 @@ import com.esprit.services.ServiceProgres;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,8 +29,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -47,6 +52,8 @@ public class InterfaceConsulterCourController implements Initializable {
     private TableColumn<AffichageConsulter, String> Categorie;
     @FXML
     private TableColumn<AffichageConsulter, Button> supp;
+    @FXML
+    private TableColumn<AffichageConsulter, Button> chap;
     
     ServiceContenu spContenu = new ServiceContenu();
     ServiceChapitre spChapitre = new ServiceChapitre();
@@ -54,6 +61,8 @@ public class InterfaceConsulterCourController implements Initializable {
     ServiceProgres spProgres = new ServiceProgres();
     
     private String id_tuto;
+    private List<Cours> u;
+    
 
     public void setId_tuto(String id_tuto) {
         this.id_tuto = id_tuto;
@@ -62,14 +71,25 @@ public class InterfaceConsulterCourController implements Initializable {
     public void setTableView(){
         
         List<AffichageConsulter> k = new ArrayList<>();
-        List<Cours> u = spCours.afficherParTuteur(id_tuto);
+        
+        
+        
+        u = spCours.afficherParTuteur(id_tuto);
+        
                 
         Titre.setCellValueFactory(new PropertyValueFactory<>("Titre"));
+        Titre.setCellFactory(TextFieldTableCell.forTableColumn());
+        
         Categorie.setCellValueFactory(new PropertyValueFactory<>("Categorie"));
         supp.setCellValueFactory(new PropertyValueFactory<>("Supprimer"));
+        chap.setCellValueFactory(new PropertyValueFactory<>("voir_chapitre"));
+        
+
         
         for(Cours i:u){
             Button B = new Button("Supprimer");
+            Button Chap = new Button("Voir les Chapitre");
+            
             B.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
                             
@@ -89,11 +109,35 @@ public class InterfaceConsulterCourController implements Initializable {
                                 spCours.supprimer(i);
                             }
                          });
-            AffichageConsulter ajou = new AffichageConsulter(i.getTitre(),i.getCategorie(),B);
+            
+            Chap.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            
+                            public void handle(ActionEvent e) {
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceConsulterChapitre.fxml"));
+                                Parent root;
+                                try {
+                                    root = loader.load();
+                                    retourButton.getScene().setRoot(root);  
+                                    InterfaceConsulterChapitreController consultarChapitre = loader.getController();
+                                    consultarChapitre.setIdCours(i.getId());
+                                } catch (IOException ex) {
+                                    Logger.getLogger(InterfaceConsulterCourController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                
+                            }
+                         });
+           
+            AffichageConsulter ajou = new AffichageConsulter(i.getTitre(),i.getCategorie(),B,Chap,i.getId());
             k.add(ajou);
         }
         
+        
+
+        
         tab_cours.getItems().addAll(k);
+        tab_cours.setEditable(true);
+        
         
     }
 
@@ -102,6 +146,13 @@ public class InterfaceConsulterCourController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        
+        //Iterator<Cours> itC = u.iterator();
+       //tab_cours.setEditable(true);
+        
+        
+        
         
     }    
 
@@ -112,5 +163,22 @@ public class InterfaceConsulterCourController implements Initializable {
         retourButton.getScene().setRoot(root);  
         InterfaceCoursController ajouter = loader.getController();
     }
+
+    @FXML
+    private void modifierTitre(CellEditEvent<AffichageConsulter, String> event) {
+        
+        Cours C = new Cours(event.getTableView().getItems().get(event.getTablePosition().getRow()).getId_cours(),
+                            event.getNewValue(),
+                            id_tuto,
+                            Categorie.getText());
+                
+        spCours.modifier(C);
+        
+        event.getTableView().getItems().get(event.getTablePosition().getRow()).setTitre(event.getNewValue());
+        
+    }
+
+   
+
     
 }

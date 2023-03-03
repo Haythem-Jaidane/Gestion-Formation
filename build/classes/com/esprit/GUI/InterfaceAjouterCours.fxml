@@ -15,11 +15,12 @@
             <Image url="@assets/Logo.png" />
          </image>
       </ImageView>
-      <TextField fx:id="nom" layoutX="243.0" layoutY="138.0" />
-      <ComboBox fx:id="categorie" layoutX="243.0" layoutY="199.0" prefHeight="31.0" prefWidth="187.0" />
-      <Label layoutX="175.0" layoutY="144.0" text="Nom" textFill="WHITE" />
-      <Label layoutX="159.0" layoutY="204.0" text="Categorie" textFill="WHITE" />
-      <Button fx:id="ajouterboutton" layoutX="243.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#ajouterNouveauChapitre" text="Ajouter" />
-      <Button fx:id="retour" layoutX="337.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#retourner" text="Annuler" />
+      <TextField fx:id="nom" layoutX="259.0" layoutY="124.0" />
+      <ComboBox fx:id="categorie" layoutX="259.0" layoutY="185.0" prefHeight="31.0" prefWidth="187.0" />
+      <Label layoutX="191.0" layoutY="130.0" text="Nom" textFill="WHITE" />
+      <Label layoutX="175.0" layoutY="190.0" text="Categorie" textFill="WHITE" />
+      <Button fx:id="ajouterboutton" layoutX="254.0" layoutY="295.0" mnemonicParsing="false" onMouseClicked="#ajouterNouveauChapitre" text="Ajouter" />
+      <Button fx:id="retour" layoutX="348.0" layoutY="295.0" mnemonicParsing="false" onMouseClicked="#retourner" text="Annuler" />
+      <Label fx:id="error" layoutX="220.0" layoutY="250.0" prefHeight="21.0" prefWidth="278.0" textFill="RED" />
    </children>
 </AnchorPane>

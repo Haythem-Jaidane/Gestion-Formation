@@ -7,16 +7,16 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="673.0" style="-fx-background-color: #0C2C40;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="com.esprit.GUI.InterfaceAjouterChapitreController">
+<AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="673.0" style="-fx-background-color: #0C2C40;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.GUI.InterfaceAjouterChapitreController">
    <children>
       <ImageView fitHeight="69.0" fitWidth="55.0" layoutX="51.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
          <image>
             <Image url="@assets/Logo.png" />
          </image>
       </ImageView>
-      <TextField fx:id="CapitreText" layoutX="243.0" layoutY="189.0" prefHeight="31.0" prefWidth="235.0" />
-      <Label layoutX="118.0" layoutY="194.0" text="Nom Chapitre" textFill="WHITE" />
+      <TextField fx:id="CapitreText" layoutX="266.0" layoutY="152.0" prefHeight="31.0" prefWidth="235.0" />
+      <Label layoutX="141.0" layoutY="157.0" text="Nom Chapitre" textFill="WHITE" />
       <Button fx:id="ajouterConutenu" layoutX="283.0" layoutY="282.0" mnemonicParsing="false" onMouseClicked="#ajouterNouveauContenu" prefHeight="31.0" prefWidth="111.0" text="Ajouter" />
+      <Label fx:id="error" layoutX="222.0" layoutY="224.0" prefHeight="21.0" prefWidth="241.0" textFill="#fc0000" />
    </children>
 </AnchorPane>

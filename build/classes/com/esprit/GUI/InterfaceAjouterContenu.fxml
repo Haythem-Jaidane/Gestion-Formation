@@ -8,22 +8,24 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="673.0" style="-fx-background-color: #0C2C40;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="com.esprit.GUI.InterfaceAjouterContenuController">
+<AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="673.0" style="-fx-background-color: #0C2C40;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.GUI.InterfaceAjouterContenuController">
    <children>
       <ImageView fitHeight="69.0" fitWidth="55.0" layoutX="28.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
          <image>
             <Image url="@assets/Logo.png" />
          </image>
       </ImageView>
-      <TextField fx:id="duree" layoutX="285.0" layoutY="146.0" />
-      <ComboBox fx:id="type" layoutX="282.0" layoutY="82.0" prefHeight="31.0" prefWidth="194.0" />
-      <Button fx:id="filechose" layoutX="280.0" layoutY="206.0" mnemonicParsing="false" onMouseClicked="#fileChoseClick" prefHeight="31.0" prefWidth="194.0" text="enter le contenu" />
-      <Button fx:id="contnu" layoutX="136.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#autreContenu" text="ajouter un autre contenu" />
-      <Button fx:id="chapitre" layoutX="353.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#NouveauCapitre" text="ajouter un autre chapitre" />
-      <Button fx:id="terminer" layoutX="234.0" layoutY="332.0" mnemonicParsing="false" onMouseClicked="#terminerAjout" text="Terminer l'ajout du cours" />
-      <Label layoutX="140.0" layoutY="87.0" text="type de contenu" textFill="WHITE" />
-      <Label layoutX="151.0" layoutY="151.0" text="durée estimé" textFill="WHITE" />
-      <Label layoutX="166.0" layoutY="211.0" text="Contenu" textFill="WHITE" />
+      <TextField fx:id="duree" layoutX="309.0" layoutY="171.0" />
+      <ComboBox fx:id="type" layoutX="306.0" layoutY="107.0" prefHeight="31.0" prefWidth="194.0" />
+      <Button fx:id="filechose" layoutX="304.0" layoutY="231.0" mnemonicParsing="false" onMouseClicked="#fileChoseClick" prefHeight="31.0" prefWidth="194.0" text="enter le contenu" />
+      <Button fx:id="contnu" layoutX="143.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#autreContenu" text="ajouter un autre contenu" />
+      <Button fx:id="chapitre" layoutX="360.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#NouveauCapitre" text="ajouter un autre chapitre" />
+      <Button fx:id="terminer" layoutX="241.0" layoutY="358.0" mnemonicParsing="false" onMouseClicked="#terminerAjout" text="Terminer l'ajout du cours" />
+      <Label layoutX="164.0" layoutY="112.0" text="type de contenu" textFill="WHITE" />
+      <Label layoutX="175.0" layoutY="176.0" text="durée estimé" textFill="WHITE" />
+      <Label layoutX="190.0" layoutY="236.0" text="Contenu" textFill="WHITE" />
+      <Label fx:id="error" layoutX="195.0" layoutY="268.0" prefHeight="21.0" prefWidth="297.0" textFill="#eb0000" />
+      <Label layoutX="164.0" layoutY="55.0" text="Titre de contenu" textFill="WHITE" />
+      <TextField fx:id="Titre_input" layoutX="310.0" layoutY="50.0" />
    </children>
 </AnchorPane>

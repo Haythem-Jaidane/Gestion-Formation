@@ -4,17 +4,22 @@
  */
 package com.esprit.GUI;
 
+import com.dropbox.core.DbxException;
 import com.esprit.entities.Chapitre;
+import com.esprit.services.ServiceAPIDropbox;
 import com.esprit.services.ServiceChapitre;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
@@ -31,8 +36,12 @@ public class InterfaceAjouterChapitreController implements Initializable {
     @FXML
     private TextField CapitreText;
     
+    @FXML
+    private Label error;
+    
     private String id_Cours;
     ServiceChapitre spChapitre = new ServiceChapitre();
+    private ServiceAPIDropbox dropbox;
     
 
     public void setId_Cours(String id_Cours) {
@@ -46,23 +55,34 @@ public class InterfaceAjouterChapitreController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        try {
+            dropbox = new ServiceAPIDropbox();
+        } catch (DbxException ex) {
+            Logger.getLogger(InterfaceAjouterCoursController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }    
 
     @FXML
-    private void ajouterNouveauContenu(MouseEvent event) throws IOException {
+    private void ajouterNouveauContenu(MouseEvent event) throws IOException, DbxException {
         
-        Chapitre chap = new Chapitre(CapitreText.getText(),id_Cours);
-        chap.setId(UUID.randomUUID().toString());
+        if(!CapitreText.getText().equals("")){
+            Chapitre chap = new Chapitre(CapitreText.getText(),id_Cours);
+            chap.setId(UUID.randomUUID().toString());
+            
+            dropbox.ajouterChaptireFolderDropbox(id_Cours,chap.getId());
         
-        spChapitre.ajouter(chap);
+            spChapitre.ajouter(chap);
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceAjouterContenu.fxml"));
-        Parent root = loader.load();
-        ajouterConutenu.getScene().setRoot(root);  
-        InterfaceAjouterContenuController Contenu = loader.getController();
-        Contenu.setId_chapitre(chap.getId());
-        Contenu.setId_cours(id_Cours);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceAjouterContenu.fxml"));
+            Parent root = loader.load();
+            ajouterConutenu.getScene().setRoot(root);  
+            InterfaceAjouterContenuController Contenu = loader.getController();
+            Contenu.setId_chapitre(chap.getId());
+            Contenu.setId_cours(id_Cours);
+        }
+        else{
+           error.setText("tu n'as pas enter le nom");
+        }
     }
     
 }

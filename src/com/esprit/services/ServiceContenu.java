@@ -25,15 +25,16 @@ public class ServiceContenu implements IService<Contenu> {
     @Override
     public void ajouter(Contenu C) {
         
-        String req = "INSERT INTO contenu(id_contenu,type,duree,lien_contenu,id_chapitre)"
-                     + " VALUES(?,?,?,?,?)";
+        String req = "INSERT INTO contenu(id_contenu,Titre,type,duree,lien_contenu,id_chapitre)"
+                     + " VALUES(?,?,?,?,?,?)";
         try{
             PreparedStatement st = cnx.prepareStatement(req);
             st.setString(1, C.getId());
-            st.setString(2, C.getType());
-            st.setInt(3, C.getDuree());
-            st.setString(4, C.getLiencontenu());
-            st.setString(5, C.getId_chapitre());
+            st.setString(2, C.getTitre());
+            st.setString(3, C.getType());
+            st.setInt(4, C.getDuree());
+            st.setString(5, C.getLiencontenu());
+            st.setString(6, C.getId_chapitre());
             st.executeUpdate();
             System.out.println("Contenu Ajouter");
         }catch(SQLException ex){
@@ -43,13 +44,14 @@ public class ServiceContenu implements IService<Contenu> {
 
     @Override
     public void modifier(Contenu C) {
-        String req = "UPDATE contenu SET type=?, duree=? , lien_contenu=? WHERE id_contenu=?;";
+        String req = "UPDATE contenu SET Titre=?, type=?, duree=? , lien_contenu=? WHERE id_contenu=?;";
         try{
             PreparedStatement st = cnx.prepareStatement(req);
             st.setString(1, C.getType());
-            st.setInt(2, C.getDuree());
-            st.setString(3, C.getLiencontenu());
-            st.setString(4, C.getId());
+            st.setString(2, C.getType());
+            st.setInt(3, C.getDuree());
+            st.setString(4, C.getLiencontenu());
+            st.setString(5, C.getId());
             st.executeUpdate();
             System.out.println("Contenu Modifier");
         }catch(SQLException ex){
