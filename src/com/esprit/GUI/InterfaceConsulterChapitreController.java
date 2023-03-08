@@ -4,22 +4,34 @@
  */
 package com.esprit.GUI;
 
+import com.esprit.entities.AffichageConsulter;
 import com.esprit.entities.AffichageConsulterChapitre;
+import com.esprit.entities.Chapitre;
+import com.esprit.entities.Contenu;
+import com.esprit.entities.Cours;
+import com.esprit.entities.Progres;
+import com.esprit.services.ServiceChapitre;
+import com.esprit.services.ServiceContenu;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 /**
  * FXML Controller class
@@ -40,22 +52,98 @@ public class InterfaceConsulterChapitreController implements Initializable {
     @FXML
     private TableColumn<AffichageConsulterChapitre, Button> Contenu;
     @FXML
-    private Button ajouterChapitre;
+    private Button RetourCours;
     
     private String idCours;
+    private String id_tuto;
+    
+    private ServiceChapitre spChapitre = new ServiceChapitre();
+    private ServiceContenu spContenu = new ServiceContenu();
+    private List<Chapitre> u;
+    @FXML
+    private Button ajouterChapitre;
+
+    
     
 
     public void setIdCours(String idCours) {
         this.idCours = idCours;
     }
+
+    public void setId_tuto(String id_tuto) {
+        this.id_tuto = id_tuto;
+    }
     
+    public void setTableView(){
+        
+        List<AffichageConsulterChapitre> k = new ArrayList<>();
+        
+        System.out.println(idCours);
+        
+        u = spChapitre.getChapterByCours(idCours);
+        System.out.println(u);
+        
+                
+        titre.setCellValueFactory(new PropertyValueFactory<>("Titre"));
+        titre.setCellFactory(TextFieldTableCell.forTableColumn());
+        
+        supp.setCellValueFactory(new PropertyValueFactory<>("Supp"));
+        Contenu.setCellValueFactory(new PropertyValueFactory<>("Con"));
+
+        
+
+        
+        for(Chapitre i:u){
+            
+            Button B = new Button("Supprimer");
+            Button Chap = new Button("Voir les Contenu");
+            
+            B.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            
+                            public void handle(ActionEvent e) {
+                                List<Contenu> C = spContenu.getContenuByChapitre(i.getId());
+                                for(Contenu j:C){
+                                    spContenu.supprimer(j); 
+                                }
+                                spChapitre.supprimer(i);
+                            }
+                         });
+            
+            Chap.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            
+                            public void handle(ActionEvent e) {
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceConsulterContenu.fxml"));
+                                Parent root;
+                                try {
+                                    root = loader.load();
+                                    retourButton.getScene().setRoot(root);  
+                                    InterfaceConsulterContenuController consultarChapitre = loader.getController();
+                                    consultarChapitre.setId_chapitre(i.getId());
+                                    consultarChapitre.setId_tuto(id_tuto);
+                                    consultarChapitre.setTableView();
+                                } catch (IOException ex) {
+                                    Logger.getLogger(InterfaceConsulterCourController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                
+                            }
+                         });
+           
+            AffichageConsulterChapitre ajou = new AffichageConsulterChapitre(i.getTitre(),B,Chap);
+            k.add(ajou);
+        }
+        
+        chapitreContainer.getItems().addAll(k);
+        chapitreContainer.setEditable(true);
+    }
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+       
     }    
     
     @FXML
@@ -64,6 +152,25 @@ public class InterfaceConsulterChapitreController implements Initializable {
         Parent root = loader.load();
         retourButton.getScene().setRoot(root);  
         InterfaceCoursController ajouter = loader.getController();
+    }
+
+    @FXML
+    private void RetournerCours(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceConsulterCour.fxml"));
+        Parent root = loader.load();
+        chapitreContainer.getScene().setRoot(root);  
+        InterfaceConsulterCourController ajouter = loader.getController();
+        ajouter.setId_tuto(id_tuto);
+        ajouter.setTableView();
+    }
+
+    @FXML
+    private void ajouterUnChapitre(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("interfaceAjouterChapitre.fxml"));
+        Parent root = loader.load();
+        chapitreContainer.getScene().setRoot(root);  
+        InterfaceAjouterChapitreController Chapitre = loader.getController();
+        Chapitre.setId_Cours(idCours);
     }
 
 }

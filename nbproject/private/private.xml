@@ -3,17 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/entities/Cours.java</file>
             <file>file:/D:/PIDEV/TechWork/src/com/esprit/services/ServiceAPIDropbox.java</file>
-            <file>file:/D:/PIDEV/TechWork/src/com/esprit/utils/DataSource.java</file>
             <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceAjouterContenuController.java</file>
-            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceAjouterContenu.fxml</file>
-            <file>file:/D:/PIDEV/TechWork/src/com/esprit/services/ServiceContenu.java</file>
-            <file>file:/D:/PIDEV/TechWork/src/com/esprit/tests/TestDropbox.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/services/ServiceAPIEtherum.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceConsulterCourController.java</file>
             <file>file:/D:/PIDEV/TechWork/src/com/esprit/entities/Contenu.java</file>
             <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceAjouterCoursController.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/entities/AffichageConsulterChapitre.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceConsulterChapitreController.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/utils/DataSource.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/services/ServiceContenu.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/tests/TestDropbox.java</file>
             <file>file:/D:/PIDEV/TechWork/src/com/esprit/utils/ConnectToDropbox.java</file>
             <file>file:/D:/PIDEV/TechWork/src/com/esprit/services/ServiceChapitre.java</file>
             <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceAjouterChapitreController.java</file>
+            <file>file:/D:/PIDEV/TechWork/src/com/esprit/GUI/InterfaceCoursController.java</file>
         </group>
     </open-files>
 </project-private>

@@ -80,6 +80,8 @@ public class InterfaceCoursController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+    
+
         
         Login = new Utilisateur("gtt");
         

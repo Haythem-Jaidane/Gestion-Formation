@@ -4,7 +4,9 @@
  */
 package com.esprit.GUI;
 
+import com.dropbox.core.DbxException;
 import com.esprit.entities.Progres;
+import com.esprit.services.ServiceAPIDropbox;
 import com.esprit.services.ServiceProgres;
 import java.io.IOException;
 import java.net.URL;
@@ -41,6 +43,8 @@ public class InterfaceWelcomeCoursController implements Initializable {
     private String id_utlisateur;
     
     ServiceProgres spProgres = new ServiceProgres();
+    ServiceAPIDropbox spDropbox;
+    
 
     public void setCour_id(String cour_id) {
         this.cour_id = cour_id;
@@ -63,6 +67,11 @@ public class InterfaceWelcomeCoursController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         
+        try {
+            spDropbox = new ServiceAPIDropbox();
+        } catch (DbxException ex) {
+            Logger.getLogger(InterfaceWelcomeCoursController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         new java.util.Timer().schedule( 
         new java.util.TimerTask() {
@@ -71,6 +80,11 @@ public class InterfaceWelcomeCoursController implements Initializable {
                 
                 try {
                     spProgres.ajouter(new Progres(cour_id,id_utlisateur,0,0,false));
+                    try {
+                        spDropbox.DownloadTmp(cour_id);
+                    } catch (DbxException ex) {
+                        Logger.getLogger(InterfaceWelcomeCoursController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceLireCours.fxml"));
                     Parent root = loader.load();
                     coursName.getScene().setRoot(root);

@@ -22,8 +22,10 @@ import javafx.stage.Stage;
 public class MainGUI extends Application {
     
     
+    
     @Override
     public void start(Stage primaryStage) throws IOException {
+        
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUI/InterfaceCours.fxml"));
         Parent root = loader.load();

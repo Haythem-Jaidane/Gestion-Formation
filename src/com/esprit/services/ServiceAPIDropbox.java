@@ -4,20 +4,24 @@
  */
 package com.esprit.services;
 
+import com.dropbox.core.DbxDownloader;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.util.IOUtil.ProgressListener;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.CreateFolderResult;
 import com.dropbox.core.v2.files.FileMetadata;
+import com.dropbox.core.v2.files.Metadata;
 import com.dropbox.core.v2.files.UploadBuilder;
 import com.dropbox.core.v2.files.WriteMode;
 import com.esprit.utils.ConnectToDropbox;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
+import org.web3j.protocol.core.methods.response.Log;
 
 /**
  *
@@ -56,6 +60,20 @@ public class ServiceAPIDropbox {
             System.err.println("Error reading from file \"" + F + "\": " + ex.getMessage());
         }
         return "";
+    }
+    
+    public void DownloadTmp(String idCours) throws DbxException, IOException{
+        String path = "/tmp";
+        File file = new File(path,idCours);
+
+        FileOutputStream outputStream = null;
+        try {
+            outputStream = new FileOutputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Metadata pathMetadata = cnx.files().getMetadata("/Techwork/"+idCours);
+        cnx.files().download(pathMetadata.getPathLower()).download(outputStream);
     }
     
     private static void printProgress(long uploaded, long size) {

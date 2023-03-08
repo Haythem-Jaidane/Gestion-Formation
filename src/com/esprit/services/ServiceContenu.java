@@ -81,9 +81,9 @@ public class ServiceContenu implements IService<Contenu> {
             PreparedStatement st = cnx.prepareStatement(req);
             ResultSet result = st.executeQuery();
             while(result.next()) {
-                listContenu.add(new Contenu(result.getString("id_contenu"), result.getString("type"),
-                                   result.getInt("duree"),result.getString("lien_contenu"),
-                                   result.getString("id_chapitre")
+                listContenu.add(new Contenu(result.getString("id_contenu"), result.getString("Titre"),
+                                            result.getString("type"),result.getInt("duree"),
+                                            result.getString("lien_contenu"),result.getString("id_chapitre")
                          ));
             }
             System.out.println("Contenu recuperees !");
@@ -104,9 +104,9 @@ public class ServiceContenu implements IService<Contenu> {
             st.setString(1, Chapitre_id);
             ResultSet result = st.executeQuery();
             while(result.next()) {
-                listContenu.add(new Contenu(result.getString("id_contenu"), result.getString("type"),
-                                   result.getInt("duree"),result.getString("lien_contenu"),
-                                   result.getString("id_chapitre")
+                listContenu.add(new Contenu(result.getString("id_contenu"), result.getString("Titre"),
+                                            result.getString("type"),result.getInt("duree"),
+                                            result.getString("lien_contenu"),result.getString("id_chapitre")
                          ));
             }
             System.out.println("Contenu recuperees !");

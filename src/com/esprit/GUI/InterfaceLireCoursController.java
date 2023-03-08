@@ -29,6 +29,9 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 
 /**
  * FXML Controller class
@@ -45,7 +48,7 @@ public class InterfaceLireCoursController implements Initializable {
     private Label Title;
     
     @FXML
-    private AnchorPane course_contenu;
+    private VBox course_contenu;
     
     ServiceCours spCours = new ServiceCours();
     ServiceChapitre spChapitre = new ServiceChapitre();
@@ -84,14 +87,24 @@ public class InterfaceLireCoursController implements Initializable {
             
             int i=1;
             for(Contenu O:Con){
-                Hyperlink H = new Hyperlink("Lesson "+i);
+                Hyperlink H = new Hyperlink(O.getTitre());
                 T.setContent(H);
                 H.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent e) {
-                        Label l = new Label("Lesson "+i);
+                        Label l = new Label(O.getTitre());
                         Button But = new Button("lesson terminer");
                         course_contenu.getChildren().add(l);
+                        
+                        if(O.getType().equals("Video")){
+                            Media media = new Media("https://www.dropbox.com/scl/fo/sq15akqjnvf69n6i5xqvj/h?dl=0&rlkey=e390rcgq90wsjwv0jzfijot44/"+O.getLiencontenu());
+                            MediaPlayer mediaplayer = new MediaPlayer(media);
+                            MediaView mediaView = new MediaView (mediaplayer);  
+                            course_contenu.getChildren().add(mediaView);
+                        }
+                        else if(O.getType().equals("text")){
+                            
+                        }
                         course_contenu.getChildren().add(But);
                         But.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
@@ -104,7 +117,7 @@ public class InterfaceLireCoursController implements Initializable {
                                 System.out.println(a);
                                 System.out.println(P.getProgres()+(int)(((float)O.getDuree()/(float)C.getDuree())*100));
                                 
-                                if(P.getProgres()==100){
+                                if(P.getProgres()==1){
                                     P.setIsComplete(true);
                                 }
                                 spProgress.modifier(P);

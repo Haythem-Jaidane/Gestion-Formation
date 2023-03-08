@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="673.0" style="-fx-background-color: #0C2C40;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.GUI.InterfaceConsulterContenuController">
+   <children>
+      <ImageView fitHeight="69.0" fitWidth="55.0" layoutX="37.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <image>
+            <Image url="@assets/Logo.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="chapitreContainer" layoutX="24.0" layoutY="127.0" prefHeight="200.0" prefWidth="625.0">
+        <columns>
+          <TableColumn fx:id="titre" prefWidth="173.0" text="Titre Contenu" />
+            <TableColumn fx:id="Type" prefWidth="143.0" text="Type Contenu" />
+            <TableColumn fx:id="Duree" prefWidth="133.0" text="Duree" />
+          <TableColumn fx:id="supp" prefWidth="115.0" />
+        </columns>
+      </TableView>
+      <Button fx:id="retourButton" layoutX="166.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#RetournerP" prefHeight="31.0" prefWidth="153.0" text="Retour " />
+      <Button fx:id="ajouterContenu" layoutX="268.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#ajouterUnContenu" text="Ajouter un Contenu" />
+      <Button fx:id="RetourCours" layoutX="371.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#RetournerChapitre" prefHeight="31.0" prefWidth="175.0" text="Retour a Mes Chapitre" />
+   </children>
+</AnchorPane>

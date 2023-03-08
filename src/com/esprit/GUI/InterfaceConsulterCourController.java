@@ -121,6 +121,8 @@ public class InterfaceConsulterCourController implements Initializable {
                                     retourButton.getScene().setRoot(root);  
                                     InterfaceConsulterChapitreController consultarChapitre = loader.getController();
                                     consultarChapitre.setIdCours(i.getId());
+                                    consultarChapitre.setId_tuto(id_tuto);
+                                    consultarChapitre.setTableView();
                                 } catch (IOException ex) {
                                     Logger.getLogger(InterfaceConsulterCourController.class.getName()).log(Level.SEVERE, null, ex);
                                 }

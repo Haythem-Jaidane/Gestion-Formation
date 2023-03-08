@@ -23,7 +23,14 @@
                <children>
                   <SplitPane dividerPositions="0.6698113207547169" layoutX="-1.0" layoutY="-2.0" prefHeight="475.0" prefWidth="638.0">
                     <items>
-                      <AnchorPane fx:id="course_contenu" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <VBox fx:id="course_contenu" prefHeight="567.0" prefWidth="424.0">
+                                 <children>
+                                    <Label text="Label" />
+                                 </children>
+                              </VBox>
+                           </children></AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
                               <VBox fx:id="chapter_continer" layoutY="1.0" prefHeight="437.0" prefWidth="208.0" />

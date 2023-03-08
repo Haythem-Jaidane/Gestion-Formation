@@ -21,7 +21,8 @@
             <TableColumn fx:id="Contenu" prefWidth="129.0" />
         </columns>
       </TableView>
-      <Button fx:id="retourButton" layoutX="266.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#RetournerP" prefHeight="31.0" prefWidth="153.0" text="Retour" />
-      <Button fx:id="ajouterChapitre" layoutX="268.0" layoutY="344.0" mnemonicParsing="false" text="Ajouter un Chapitre" />
+      <Button fx:id="retourButton" layoutX="166.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#RetournerP" prefHeight="31.0" prefWidth="153.0" text="Retour " />
+      <Button fx:id="ajouterChapitre" layoutX="268.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#ajouterUnChapitre" text="Ajouter un Chapitre" />
+      <Button fx:id="RetourCours" layoutX="371.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#RetournerCours" prefHeight="31.0" prefWidth="151.0" text="Retour a Mes Cours" />
    </children>
 </AnchorPane>
