@@ -35,7 +35,7 @@
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Button fx:id="ajouter" layoutX="166.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#ajouterCoursT" text="Ajouter un cours" />
-      <Button fx:id="consulter" layoutX="362.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#consulterMesCours" text="Consulter mes cours" />
+      <Button fx:id="ajouter" layoutX="171.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#ajouterCoursT" text="Ajouter un cours" />
+      <Button fx:id="consulter" layoutX="367.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#consulterMesCours" text="Consulter mes cours" />
    </children>
 </AnchorPane>

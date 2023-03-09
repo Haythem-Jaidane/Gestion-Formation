@@ -26,7 +26,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -80,6 +83,12 @@ public class InterfaceAjouterCoursController implements Initializable {
     @FXML
     private void ajouterNouveauChapitre(MouseEvent event) throws IOException, GeneralSecurityException, DbxException {
         
+        Dialog<String> dialog = new Dialog<String>();
+        dialog.setTitle("Cours Ajouter");
+        ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+        dialog.setContentText("le Cours "+ nom.getText()+" à été ajoutée");
+        dialog.getDialogPane().getButtonTypes().add(type);
+        
         if(!(nom.getText().equals("")) && !(categorie.getValue().equals(""))){
             
             
@@ -89,6 +98,8 @@ public class InterfaceAjouterCoursController implements Initializable {
             dropbox.ajouterCoursFolderDropbox(C.getId());
             
             spCours.ajouter(C);
+            
+            dialog.showAndWait();
         
             FXMLLoader loader = new FXMLLoader(getClass().getResource("interfaceAjouterChapitre.fxml"));
             Parent root = loader.load();

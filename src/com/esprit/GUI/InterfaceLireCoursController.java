@@ -12,10 +12,16 @@ import com.esprit.services.ServiceChapitre;
 import com.esprit.services.ServiceContenu;
 import com.esprit.services.ServiceCours;
 import com.esprit.services.ServiceProgres;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -32,6 +38,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -95,14 +102,40 @@ public class InterfaceLireCoursController implements Initializable {
                         Label l = new Label(O.getTitre());
                         Button But = new Button("lesson terminer");
                         course_contenu.getChildren().add(l);
-                        
+
                         if(O.getType().equals("Video")){
-                            Media media = new Media("https://www.dropbox.com/scl/fo/sq15akqjnvf69n6i5xqvj/h?dl=0&rlkey=e390rcgq90wsjwv0jzfijot44/"+O.getLiencontenu());
+                            File mediaFile = new File(System.getProperty("user.dir")+"src\\com\\esprit\\service\\tmp\\"+id_cours+"\\"+C.getId()+"\\"+O.getTitre()+".mp4");
+                            Media media;
+                            media = new Media(mediaFile.toURI().toString());
                             MediaPlayer mediaplayer = new MediaPlayer(media);
-                            MediaView mediaView = new MediaView (mediaplayer);  
+                            MediaView mediaView = new MediaView (mediaplayer);
                             course_contenu.getChildren().add(mediaView);
+                            
                         }
-                        else if(O.getType().equals("text")){
+                        else if(O.getType().equals("Texte")){
+                            Text t = new Text("");
+                            FileReader fr; 
+                            String currentDir = System.getProperty("user.dir");
+                            System.out.println("Current working directory: " + currentDir);
+                            try {
+                                fr = new FileReader(System.getProperty("user.dir")+"/src/com/esprit/service/tmp/"+id_cours+"/"+C.getId()+"/"+O.getTitre()+".txt");
+                                int i; 
+                            try {
+                                String D = t.getText();
+                                while ((i=fr.read()) != -1){
+                                    D= D + (char)i;
+                                    System.out.println(D);
+                                    
+                                }
+                                t.setText(D);
+                            } catch (IOException ex) {
+                                Logger.getLogger(InterfaceLireCoursController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            } catch (FileNotFoundException ex) {
+                                Logger.getLogger(InterfaceLireCoursController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            course_contenu.getChildren().add(t);
+                            
                             
                         }
                         course_contenu.getChildren().add(But);

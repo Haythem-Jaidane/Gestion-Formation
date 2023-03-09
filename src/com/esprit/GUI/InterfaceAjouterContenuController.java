@@ -105,7 +105,7 @@ public class InterfaceAjouterContenuController implements Initializable {
                 
                 String extension = selectedFile.toString().substring(selectedFile.toString().lastIndexOf("."));
                 System.out.println(extension);
-                if( (type.getValue().equals("Text") && extension.equals(".txt")) || (type.getValue().equals("Video") && extension.equals(".mp4"))){
+                if( (type.getValue().equals("Texte") && extension.equals(".txt")) || (type.getValue().equals("Video") && extension.equals(".mp4"))){
                     Contenu Con = new Contenu(Titre_input.getText(),type.getValue(),Integer.parseInt(duree.getText()),"",id_chapitre);
                     Con.setId(UUID.randomUUID().toString());
         
@@ -142,7 +142,7 @@ public class InterfaceAjouterContenuController implements Initializable {
             try{
                 String extension = selectedFile.toString().substring(selectedFile.toString().lastIndexOf("."));
                 
-                if( (type.getValue().equals("Text") && extension.equals(".txt")) || (type.getValue().equals("Video") && extension.equals(".mp4"))){
+                if( (type.getValue().equals("Texte") && extension.equals(".txt")) || (type.getValue().equals("Video") && extension.equals(".mp4"))){
                     Contenu Con = new Contenu(Titre_input.getText(),type.getValue(),Integer.parseInt(duree.getText()),"",id_chapitre);
                     Con.setId(UUID.randomUUID().toString());
                 
@@ -175,11 +175,11 @@ public class InterfaceAjouterContenuController implements Initializable {
 
     @FXML
     private void terminerAjout(MouseEvent event) throws IOException {
-        if(!type.getValue().equals("") && !duree.getText().equals("") && !Titre_input.getText().equals("") && selectedFile != null){
+        if((!type.getValue().equals("") && !duree.getText().equals("")) && (!Titre_input.getText().equals("") && selectedFile != null)){
             try{
                 String extension = selectedFile.toString().substring(selectedFile.toString().lastIndexOf("."));
                 
-                if( (type.getValue().equals("Text") && extension.equals(".txt")) || (type.getValue().equals("Video") && extension.equals(".mp4"))){
+                if( (type.getValue().equals("Texte") && extension.equals(".txt")) || (type.getValue().equals("Video") && extension.equals(".mp4"))){
                     Contenu Con = new Contenu(Titre_input.getText(),type.getValue(),Integer.parseInt(duree.getText()),"",id_chapitre);
                     Con.setId(UUID.randomUUID().toString());
                 

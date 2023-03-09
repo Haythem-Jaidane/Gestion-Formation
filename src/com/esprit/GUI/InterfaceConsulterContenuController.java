@@ -4,16 +4,20 @@
  */
 package com.esprit.GUI;
 
+import com.dropbox.core.DbxException;
 import com.esprit.entities.AffichageConsulter;
 import com.esprit.entities.AffichageConsulterContenu;
 import com.esprit.entities.Chapitre;
 import com.esprit.entities.Contenu;
+import com.esprit.services.ServiceAPIDropbox;
 import com.esprit.services.ServiceContenu;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,6 +25,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -55,8 +62,10 @@ public class InterfaceConsulterContenuController implements Initializable {
     
     private String id_tuto;
     private String id_chapitre;
+    private String id_cours;
     
     private ServiceContenu spContenu = new ServiceContenu();
+    ServiceAPIDropbox dropbox ;
     private List<Contenu> u;
     
 
@@ -67,9 +76,16 @@ public class InterfaceConsulterContenuController implements Initializable {
     public void setId_chapitre(String id_chapitre) {
         this.id_chapitre = id_chapitre;
     }
+
+    public void setId_cours(String id_cours) {
+        this.id_cours = id_cours;
+    }
     
     
-    public void setTableView(){
+    
+    public void setTableView() throws DbxException{
+        
+        dropbox = new ServiceAPIDropbox();
         
         List<AffichageConsulterContenu> k = new ArrayList<>();
         
@@ -100,7 +116,45 @@ public class InterfaceConsulterContenuController implements Initializable {
                             @Override
                             
                             public void handle(ActionEvent e) {
+                                
+                                Dialog<String> dialog = new Dialog<String>();
+                                dialog.setTitle("Contenu Supprimer");
+                                ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+                                dialog.setContentText("le Contenu "+ i.getTitre()+" à été supprimé");
+                                dialog.getDialogPane().getButtonTypes().add(type);
+                                
+                                try {
+
+                                    if(i.getType().equals("Video")){
+                                        dropbox.supprimerFile("/Teckwork/"+id_cours+"/"+id_chapitre+"/"+i.getId()+".mp4");
+                                    }
+                                    else if(i.getType().equals("Text")){
+                                        dropbox.supprimerFile("/Teckwork/"+id_cours+"/"+id_chapitre+"/"+i.getId()+".txt");
+                                    }
+                                } catch (DbxException ex) {
+                                    Logger.getLogger(InterfaceConsulterContenuController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                
                                 spContenu.supprimer(i);
+                                
+                                dialog.showAndWait();
+                                
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("interfaceConsulterContenu.fxml"));
+                                Parent root;
+                                try {
+                                    root = loader.load();
+                                    chapitreContainer.getScene().setRoot(root);  
+                                InterfaceConsulterContenuController Chapitre = loader.getController();
+                                Chapitre.setId_chapitre(id_chapitre);
+                                Chapitre.setId_tuto(id_tuto);
+                                Chapitre.setId_cours(id_cours);
+                                Chapitre.setTableView();
+                                } catch (IOException ex) {
+                                    Logger.getLogger(InterfaceConsulterContenuController.class.getName()).log(Level.SEVERE, null, ex);
+                                } catch (DbxException ex) {
+                                    Logger.getLogger(InterfaceConsulterContenuController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                
                             }
                          });
          
@@ -139,18 +193,20 @@ public class InterfaceConsulterContenuController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("interfaceAjouterContenu.fxml"));
         Parent root = loader.load();
         chapitreContainer.getScene().setRoot(root);  
-        InterfaceAjouterChapitreController Chapitre = loader.getController();
-        Chapitre.setId_Cours(id_chapitre);
+        InterfaceAjouterContenuController Chapitre = loader.getController();
+        Chapitre.setId_cours(id_cours);
+        Chapitre.setId_chapitre(id_chapitre);
         
     }
 
     @FXML
-    private void RetournerChapitre(MouseEvent event) throws IOException{
+    private void RetournerChapitre(MouseEvent event) throws IOException, DbxException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceConsulterChapitre.fxml"));
         Parent root = loader.load();
         chapitreContainer.getScene().setRoot(root);  
         InterfaceConsulterChapitreController ajouter = loader.getController();
         ajouter.setId_tuto(id_tuto);
+        ajouter.setIdCours(id_cours);
         ajouter.setTableView();
     }
     

@@ -4,11 +4,13 @@
  */
 package com.esprit.GUI;
 
+import com.dropbox.core.DbxException;
 import com.esprit.entities.AffichageConsulter;
 import com.esprit.entities.Chapitre;
 import com.esprit.entities.Contenu;
 import com.esprit.entities.Cours;
 import com.esprit.entities.Progres;
+import com.esprit.services.ServiceAPIDropbox;
 import com.esprit.services.ServiceChapitre;
 import com.esprit.services.ServiceContenu;
 import com.esprit.services.ServiceCours;
@@ -28,6 +30,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
@@ -59,6 +64,7 @@ public class InterfaceConsulterCourController implements Initializable {
     ServiceChapitre spChapitre = new ServiceChapitre();
     ServiceCours spCours = new ServiceCours();
     ServiceProgres spProgres = new ServiceProgres();
+    ServiceAPIDropbox dropbox ;
     
     private String id_tuto;
     private List<Cours> u;
@@ -68,11 +74,11 @@ public class InterfaceConsulterCourController implements Initializable {
         this.id_tuto = id_tuto;
     }
     
-    public void setTableView(){
+    public void setTableView() throws DbxException{
         
         List<AffichageConsulter> k = new ArrayList<>();
         
-        
+        dropbox = new ServiceAPIDropbox(); 
         
         u = spCours.afficherParTuteur(id_tuto);
         
@@ -94,7 +100,15 @@ public class InterfaceConsulterCourController implements Initializable {
                             @Override
                             
                             public void handle(ActionEvent e) {
+                                
                                 List<Chapitre> C = spChapitre.getChapterByCours(i.getId());
+                                
+                                Dialog<String> dialog = new Dialog<String>();
+                                dialog.setTitle("Cours Supprimer");
+                                ButtonType type = new ButtonType("Ok", ButtonData.OK_DONE);
+                                dialog.setContentText("le Cours "+ i.getTitre()+" à été supprimer");
+                                dialog.getDialogPane().getButtonTypes().add(type);
+                                
                                 for(Chapitre j:C){
                                     List<Contenu> Con = spContenu.getContenuByChapitre(j.getId());
                                     for(Contenu ii:Con){
@@ -105,8 +119,27 @@ public class InterfaceConsulterCourController implements Initializable {
                                     System.out.println(j);
                                     spChapitre.supprimer(j); 
                                 }
+                                try {
+                                    dropbox.supprimerFolder(i.getId());
+                                } catch (DbxException ex) {
+                                    Logger.getLogger(InterfaceConsulterCourController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                                 spProgres.supprimerParCours(new Progres(i.getId()));
                                 spCours.supprimer(i);
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceConsulterCour.fxml"));
+                                Parent root;
+                                try {
+                                    root = loader.load();
+                                    retourButton.getScene().setRoot(root);  
+                                    InterfaceConsulterCourController consultarCour = loader.getController();
+                                    consultarCour.setId_tuto(id_tuto);
+                                    consultarCour.setTableView();
+                                    dialog.showAndWait();
+                                } catch (IOException ex) {
+                                    Logger.getLogger(InterfaceConsulterCourController.class.getName()).log(Level.SEVERE, null, ex);
+                                } catch (DbxException ex) {
+                                    Logger.getLogger(InterfaceConsulterCourController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                             }
                          });
             
@@ -122,7 +155,11 @@ public class InterfaceConsulterCourController implements Initializable {
                                     InterfaceConsulterChapitreController consultarChapitre = loader.getController();
                                     consultarChapitre.setIdCours(i.getId());
                                     consultarChapitre.setId_tuto(id_tuto);
-                                    consultarChapitre.setTableView();
+                                    try {
+                                        consultarChapitre.setTableView();
+                                    } catch (DbxException ex) {
+                                        Logger.getLogger(InterfaceConsulterCourController.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
                                 } catch (IOException ex) {
                                     Logger.getLogger(InterfaceConsulterCourController.class.getName()).log(Level.SEVERE, null, ex);
                                 }
@@ -179,6 +216,7 @@ public class InterfaceConsulterCourController implements Initializable {
         event.getTableView().getItems().get(event.getTablePosition().getRow()).setTitre(event.getNewValue());
         
     }
+
 
    
 

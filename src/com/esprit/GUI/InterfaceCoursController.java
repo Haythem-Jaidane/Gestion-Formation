@@ -4,6 +4,7 @@
  */
 package com.esprit.GUI;
 
+import com.dropbox.core.DbxException;
 import com.esprit.entities.*;
 import com.esprit.services.*;
 import java.io.IOException;
@@ -22,6 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -30,6 +32,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Circle;
 
 /**
  * FXML Controller class
@@ -149,7 +152,7 @@ public class InterfaceCoursController implements Initializable {
 
 
     @FXML
-    private void consulterMesCours(MouseEvent event) throws IOException {
+    private void consulterMesCours(MouseEvent event) throws IOException, DbxException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("InterfaceConsulterCour.fxml"));
         Parent root = loader.load();
         tab_cour.getScene().setRoot(root);  

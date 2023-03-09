@@ -16,7 +16,7 @@ import com.dropbox.core.v2.users.FullAccount;
 
 public class ConnectToDropbox {
     
-    private static final String ACCESS_TOKEN = "sl.BaNkn2od--ELtQekre7F03mSeCJhEy3dlzQM7BsjicazpJlvqXJQpbpAb4bGD5BkG8PRv2sVutSWCFCTJrkKqwogtPlU583llRLEpoSawbu3o4WsoMJoSX3yLdSwsfgywIx0e04";
+    private static final String ACCESS_TOKEN = "sl.BaMT_WYOuLQgP2yx_LL1uD5gkGDDuspK51BmUHZYKGtUwKKD7h2mFmlyX0bkUkHF-c0exLwFQMJY50eO2oN5A3fa1zvxJ56OXsth8jM5w-hLUkVSks6YrLZk5jtzbfhYoMmW7QM";
     private DbxClientV2 client;
     
     private static ConnectToDropbox instance;

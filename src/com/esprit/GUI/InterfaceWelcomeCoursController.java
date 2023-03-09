@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -77,7 +78,9 @@ public class InterfaceWelcomeCoursController implements Initializable {
         new java.util.TimerTask() {
             @Override
             public void run() {
-                
+                Platform.runLater(() -> {
+            // Code that updates the UI goes here
+        
                 try {
                     spProgres.ajouter(new Progres(cour_id,id_utlisateur,0,0,false));
                     try {
@@ -95,6 +98,7 @@ public class InterfaceWelcomeCoursController implements Initializable {
                 } catch (IOException ex) {
                     Logger.getLogger(InterfaceWelcomeCoursController.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                });
             }
         }, 
         5000 
